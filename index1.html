@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/index.css">
+    <script src="public/js/jquery-1.11.3.js"></script>
+    <style>
+        #slider{
+          width:100%; height:500px;
+          position:relative;
+          /* border:1px solid #555; */
+        }
+        #slider>img{
+            display: block;
+            width: 100%;
+            height: 500px;
+          position:absolute; top:0; left:0;
+          opacity:0;
+          transition:all .3s linear;
+        }
+        #slider>img.show{  opacity:1;  }
+      </style>
+</head>
+<body>
+  <div  class="qwe" > 
+  <div class="chunchun"   > 
+    <img src="public/img/banner4.jpg" class="my-big">
+    </div>
+    <div class="chunchun1" >
+       
+        <img src="public/img/banner1.jpg" data-target="public/img/banner1.jpg" class="my-small"  /> 
+        <img src="public/img/banner2.jpg" data-target="public/img/banner2.jpg" class="my-small"  /> 
+        <img src="public/img/banner3.jpg" data-target="public/img/banner3.jpg" class="my-small"  /> 
+        <img src="public/img/banner4.jpg" data-target="public/img/banner4.jpg" class="my-small"  /> 
+    </div>
+  </div>
+ 
+      <div class="info">
+        <div class="notice">
+          <h5>
+            <span>迎新通知</span>
+            <a>更多</a>
+          </h5>
+          <ul>
+            <li>
+              <a href="http://zhaoban.xjtucc.cn/index.php?m=content&c=index&a=lists&catid=10" target="blank">西安交通大学城市学院迎新接站提示</a>
+              <span>[4-27]</span>
+            </li>
+            <li>
+              <a href="http://xsc.xjtucc.cn/" target="blank">西安交通大学城市学院2018级本科新生...</a>
+              <span>[4-27]</span>
+            </li>
+            <li>
+              <a href="http://zhaoban.xjtucc.cn/index.php?m=content&c=index&a=show&catid=13&id=226" target="blank">西安交通大学城市学院周边宾馆联系方式</a>
+              <span>[4-27]</span>
+            </li>
+            <li>
+              <a href="http://zhaoban.xjtucc.cn/index.php?m=content&c=index&a=lists&catid=15" target="blank">关于新生照片审核进展的说明</a>
+              <span>[4-27]</span>
+            </li>
+          </ul>
+        </div>
+        <div class="service">
+          <h5>公共服务</h5>
+          <ul style="list-style:none">
+            <li><a href="http://www.xjtucc.cn/zw.jsp?wbtreeid=1128" target="_blank">&gt;&gt;学校概况</a></li>
+            <li><a href="https://mp.weixin.qq.com/s?__biz=MzA3MjUwMzcwMw%3D%3D&idx=1&mid=2652862707&sn=d642222fbc6fb95d32b368c062d08ceb" target="_blank">&gt;&gt;城院新闻</a></li>
+            <li><a href="http://zhaoban.xjtucc.cn/" target="blank">&gt;&gt;招生信息</a></li>
+            <li><a href="http://www.xjtucc.cn/nry.jsp?urltype=news.NewsContentUrl&wbnewsid=11373&wbtreeid=1124" target="blank">&gt;&gt;家长接待</a></li>
+          </ul>
+        </div>
+      </div>     
+  
+   
+   <tfoot>
+      <div class="footer">
+        西安交通大学城市学院版权所有&copy2019
+      </div> 
+   </tfoot>
+  
+   <script>
+      //点击小图片，下方my-big中显示大图片
+      $(".chunchun1 img.my-small").click(function(){
+        var $img=$(this);
+        var src=$img.attr("data-target");
+        $(".my-big").attr({src});
+      })
+    </script>
+ 
+</body>
+</html>

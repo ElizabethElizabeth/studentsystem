@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="public/css/bootstrap.css"/>
+    <link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="public/bootstrap-table/dist/bootstrap-table.css">
+    
+ 
+  <!-- js -->  
+    <script src="public/js/jquery.min.js"></script>
+    <!-- <script src="../public/js/popper.min.js"></script> -->
+    <script src=" public/js/bootstrap.min.js"></script>
+    <script src=" public/bootstrap-table/dist/bootstrap-table.js"></script>
+    <script src="public/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+ 
+</head>
+<body>
+    <div class="container">
+      <h2>新生信息确认</h2>
+      <table id="grid" class="table  table-hover "  ></table>
+    </div>
+    <script type="text/javascript">
+   
+        $(function(){
+                 InitMainTable($table);
+               })
+        var $table;
+             //初始化bootstrap-table的内容
+             function InitMainTable () {
+                 //记录页面bootstrap-table全局变量$table，方便应用
+                 var queryUrl = "http://39.105.201.140:8100/api/UserApi/GetUserList?pageIndex=0&pageSize=10"
+                
+                 var $table = $("#grid").bootstrapTable({
+                  
+                     height:getHeight(),
+                      method: 'get',
+                     dataType: 'json',
+                     contentType: 'application/x-www-form-urlencoded',
+                     url: queryUrl,                      //请求后台的URL（*）
+                     paginationLoop: true,
+                    //toolbar: '#toolbar',              //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: true,                     //是否启用排序
+                    sortOrder: "desc",                   //排序方式
+                    sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                    DataCount:426,
+                    pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
+                    pageSize: 10,                           //每页的记录行数（*）
+                    pageList: [5, 10, 15, 20],      //可供选择的每页的行数（*）
+                    search: true,                      //是否显示表格搜索
+                    // strictSearch: true,
+                    showColumns: false,                  //是否显示所有的列（选择显示的列）
+                    showRefresh: true,                  //是否显示刷新按钮
+                    // minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                    showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,  
+                    showExport: true, 
+                    queryParamsType:'undefined',                 //是否显示父子表
+                     queryParams : function (params) {
+                        //  这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                        //  console.log(params.limit)
+                  //  var temp = {   
+                  //            DataCount=params.result.DataCount
+                             
+                  //          PageCount:params.PageCount,
+                  //          PageIndex:params. PageIndex,
+                  //          PageSize:params.PageSize  
+                  //     };
+                  //       console.log(temp)
+                  return {
+                              pageNum: params.offset+1,
+                              pageSize: params.limit,
+                              // date:faildate
+                            };
+     
+                    },
+    
+    
+                    rowStyle: function (row, index) {
+                     var classesArr = ['success', 'info'];
+                     var strclass = "";
+                     if (index % 2 === 0) {//偶数行
+                         strclass = classesArr[0];
+                     } else {//奇数行
+                         strclass = classesArr[1];
+                     }
+                     return { classes: strclass };
+                   },//隔行变色
+                  responseHandler: function responseHandler(res) {
+                         var data1=JSON.parse(res);
+                        // // //  var total=JSON.parse(data1.Data.DataCount)  
+                         var result = JSON.parse(data1.Data);
+                        //  var rowss =result.Result;
+                        //  var total = result.DataCount;
+                    
+                         return {
+                        "total": result.PageIndex,//总页数
+                        
+                        "rows":  result.Result//数据
+                     };
+     
+                     },
+               columns: [
+                
+                {
+               checkbox: true,    visible: true  
+                },
+                 {
+                    field:"Id", title: '编号', align: 'center', valign: 'middle',  width:'200', sortable: true,
+                    
+                },
+               {
+                   field: "Name", title: '姓名', align: 'center', valign: 'middle',  width:'100',  sortable: true,
+                    
+               },
+               
+                {
+                    field: "UnitName", title: '单位名称', align: 'center', valign: 'middle',width:'100',  sortable: true,
+                },
+     
+                 {
+                     field:"Phone", title: '电话', align: 'center', valign: 'middle',  width:'200',   sortable: true,
+                 },
+                 {
+                     field: "CreateTime", title: '创建时间', align: 'center', valign: 'middle',width:'200',   sortable: true
+                 },
+                 {
+                        field:'nnn',   title: '操作',  width: 200,  align: 'center',  valign: 'middle', formatter: actionFormatter
+                },
+                     
+                  ],
+                  onLoadSuccess: function () {
+                    console.log("加载成功")  
+                            
+                         },
+                  onLoadError: function () {
+                    console.log("数据加载失败！");
+                   },
+                 });
+                };
+     
+     
+     
+                function actionFormatter(value, row, index) {
+                    var salary = '<button type="button" class="btn btn-primary gongzichakan"   data-toggle="modal" data-target="#myModal111">详情</button>'
+     
+                var chakan = ' <button type="button" class="btn btn-info chakanyuangong">查看</button>'
+                var xiaochu;
+                 
+                    xiaochu = ' <button type="button" class="btn btn-warning remove">删除</button>'
+                 
+                return salary + chakan + xiaochu;
+    
+     
+               }
+      
+     //查询按钮事件
+          $('#search_btn').click(function() {  
+            $('#grid').bootstrapTable('refresh', {
+             url :  "http://39.105.201.140:8100/api/UserApi/GetUserList?pageIndex=10&pageSize=10"
+             });
+              })
+      
+           function getHeight() {
+             return $(window).height() - 100;
+               }
+                
+         
+        </script>  
+         
+       <script>
+        function getsetdata(){
+          var bttn="";
+    
+    
+        }
+       </script>
+</body>
+</html>
