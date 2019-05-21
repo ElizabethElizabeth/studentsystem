@@ -48,30 +48,28 @@
 </section>
  
 </div>
-</div>
-</body>
 <script>
-    window.onscroll=function(){
-      //scrollTop相当于滚动之后首页开始到滚动之后的顶部距离可在console台看到
-      var scrollTop=document.body.scrollTop||document.documentElement.scrollTop 
-      console.log(scrollTop);
-      if(scrollTop>=300)
-      toTop.style.display="block";
-      else
-      toTop.style.display="none";
-    }
- </script>
- 
+  window.onscroll=function(){
+    //scrollTop相当于滚动之后首页开始到滚动之后的顶部距离可在console台看到
+    var scrollTop=document.body.scrollTop||document.documentElement.scrollTop 
+    console.log(scrollTop);
+    if(scrollTop>=300)
+    toTop.style.display="block";
+    else
+    toTop.style.display="none";
+  }
+</script>
+
 <script type="text/javascript">
 $.backstretch([
-        'http://api.asilu.com/cdn/img/bg/444.jpg',
-        'http://api.asilu.com/cdn/img/bg/446.jpg',
-        'http://api.asilu.com/cdn/img/bg/447.jpg',
-        'http://api.asilu.com/cdn/img/bg/448.jpg'
-    ], {
-        fade : 1000, // 动画时长
-        duration : 2000 // 切换延时
+      'http://api.asilu.com/cdn/img/bg/444.jpg',
+      'http://api.asilu.com/cdn/img/bg/446.jpg',
+      'http://api.asilu.com/cdn/img/bg/447.jpg',
+      'http://api.asilu.com/cdn/img/bg/448.jpg'
+  ], {
+      fade : 1000, // 动画时长
+      duration : 2000 // 切换延时
 });
 </script>
- 
+</body>
 </html>
