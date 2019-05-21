@@ -9,8 +9,11 @@
   background: #ddc;
   padding: 5px 10px;
 }
+.top a{
+  color: #000;
+}
 .top a:nth-child(2){
-  margin-left: 960px;
+  margin-left: 910px;
 }
 section{
   /* background: url(../img/background.jpg) no-repeat; */
@@ -65,16 +68,20 @@ a{
 .info{
   display: flex;
 }
-.login,.notice,.service{
-  width: 33.3%;
+.notice,.service{
+  width: 49.2%;
   height: 200px;
   border: 1px solid #0a0;
+  background: #fff;
 }
 #toTop{
   position:fixed;
   bottom:100px;
   right:0;
   display:none;
+  background: #ffffff;
+  width: 40px;
+  height: 50px;
 }
 .chunchun img{
     width:800px;

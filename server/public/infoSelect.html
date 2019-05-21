@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="public/css/bootstrap.css"/>
-    <link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="public/bootstrap-table/dist/bootstrap-table.css">
-    <link rel="stylesheet" href=" public/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="bootstrap-table/dist/bootstrap-table.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     
  
   <!-- js -->  
-    <script src="public/js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <!-- <script src="../public/js/popper.min.js"></script> -->
-    <script src=" public/js/bootstrap.min.js"></script>
-    <script src=" public/bootstrap-table/dist/bootstrap-table.js"></script>
-    <script src="public/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
-    <script src=" public/1/WdatePicker.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="bootstrap-table/dist/bootstrap-table.js"></script>
+    <script src="bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="1/WdatePicker.js"></script>
 </head>
 <body>
     <div class="container"> 
-    <h2>新生信息查询</h2>
-    <div id="app"style=" background-color:#f2f2f2; width:100%;  font-size:1em;"  >
+    <h2>新生个人信息查询</h2>
+    <div id="app"style=" background-color:#f2f2f2; width:100%; font-size:1em;"  >
         <div style=" height:5em;  padding: 1.2em;margin-left:2em;" > 
              
             <span > 开始时间:<input id="startTime" name="startTime" type="text" style="border-radius: 0.4em; border:blue;width:9em;height:2em"onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value=""> </span>
@@ -43,14 +43,14 @@
             
          </div>
              
-           </div>
-        </div>
+    </div>
+    </div>   
            <table id="grid" class="table  table-hover "  ></table>
            <script type="text/javascript">
    
             $(function(){
                      InitMainTable($table);
-                   })
+            })
             var $table;
                  //初始化bootstrap-table的内容
                  function InitMainTable () {
@@ -88,23 +88,22 @@
                         detailView: false,  
                         showExport: true, 
                         queryParamsType:'undefined',                 //是否显示父子表
-                         queryParams : function (params) {
-                            //  这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                        queryParams : function (params) {
+                            //  这里的键的名字和控制器的变量名必须一直，这边改动，控  也需要改成一样的
                             //  console.log(params.limit)
-                      //  var temp = {   
-                      //            DataCount=params.result.DataCount
-                                 
-                      //          PageCount:params.PageCount,
-                      //          PageIndex:params. PageIndex,
-                      //          PageSize:params.PageSize  
-                      //     };
-                      //       console.log(temp)
-                      return {
-                                  pageNum: params.offset+1,
-                                  pageSize: params.limit,
-                                  // date:faildate
-                                };
-         
+                            //  var temp = {   
+                            //  DataCount=params.result.DataCount
+                                        
+                            //  PageCount:params.PageCount,
+                            //  PageIndex:params. PageIndex,
+                            //  PageSize:params.PageSize  
+                            //     };
+                            //       console.log(temp)
+                            return {
+                                        pageNum: params.offset+1,
+                                        pageSize: params.limit,
+                                        // date:faildate
+                            };
                         },
         
         
@@ -132,61 +131,63 @@
                          };
          
                          },
-                   columns: [
-                    
-                    {
-                   checkbox: true,    visible: true  
-                    },
-                     {
-                        field:"id", title: '编号', align: 'center', valign: 'middle',  width:'200', sortable: true,
+                   columns: [  
+                      {
+                        checkbox: true,    visible: true  
+                      },
+                      {
+                        field:"id", title: '编号', align: 'center', valign: 'middle',  width:'200', sortable: true,       
+                      },
+                      {
+                       field: "sname", title: '姓名', align: 'center', valign: 'middle',  width:'100',  sortable: true,   
+                      },
+                      {
+                       field: "age", title: '年龄', align: 'center', valign: 'middle',  width:'100',  sortable: true,
                         
-                    },
-                   {
-                       field: "age", title: '姓名', align: 'center', valign: 'middle',  width:'100',  sortable: true,
-                        
-                   },
-                   {
+                      },
+                      {
                        field: "idNum", title: '学生编号', align: 'center', valign: 'middle',  width:'100',  sortable: true,
                         
-                   },
-                   {
-                       field: "examNum", title: '编号', align: 'center', valign: 'middle',  width:'100',  sortable: true,
+                      },
+                      {
+                       field: "examNum", title: '准考证号', align: 'center', valign: 'middle',  width:'100',  sortable: true,
                         
-                   },
-                   
-                    {
-                        field: "admitNum", title: '考生号', align: 'center', valign: 'middle',width:'100',  sortable: true,
-                    },
-         
-                     {
-                         field:"school", title: '毕业学校', align: 'center', valign: 'middle',  width:'200',   sortable: true,
-                     },
-                     {
-                         field: "telephone", title: '电话', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     },
-                     {
-                         field: "mobile", title: '手机号', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     },
-                     {
-                         field: "email", title: '电子邮件', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     },
-                     {
-                         field: "upwd", title: '邮政编号', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     }, {
-                         field: "addressH", title: '家庭地址', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     },
-                     {
-                         field: "addressR", title: '毕业学校', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     },
-                     {
-                         field: "confirm", title: '是/否', align: 'center', valign: 'middle',width:'200',   sortable: true
-                     },
-
-                     {
-                            field:'nnn',   title: '操作',  width: 200,  align: 'center',  valign: 'middle', formatter: actionFormatter
-                    },
+                      },
+                      {
+                       field: "admitNum", title: '考生号', align: 'center',   valign: 'middle',width:'100',  sortable: true,
+                      },           
+                      {
+                      field:"school", title: '毕业学校', align: 'center',valign: 'middle',  width:'200',   sortable: true,
+                      },
+                      {
+                       field: "telephone", title: '电话', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      },
+                      {
+                       field: "mobile", title: '手机号', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      },
+                      {
+                       field: "email", title: '电子邮件', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      },
+                      {
+                       field: "pwd", title: '密码', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      }, 
+                      {
+                       field: "gender", title: '性别', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      }, 
+                      {
+                       field: "addressH", title: '家庭地址', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      },
+                      {
+                       field: "addressR", title: '收货地址', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      },
+                      {
+                       field: "confirm", title: '是/否', align: 'center', valign: 'middle',width:'200',   sortable: true
+                      },
+                      {
+                          field:'nnn',   title: '操作',  width: 200,  align: 'center',  valign: 'middle', formatter: actionFormatter
+                      }
                          
-                      ],
+                   ],
                       onLoadSuccess: function () {
                         console.log("加载成功")  
                                 
@@ -194,43 +195,31 @@
                       onLoadError: function () {
                         console.log("数据加载失败！");
                        },
-                     });
-                    };
-         
-         
-         
+                     };
+                };    
                     function actionFormatter(value, row, index) {
                         var salary = '<button type="button" class="btn btn-primary gongzichakan"   data-toggle="modal" data-target="#myModal111">详情</button>'
          
                     var chakan = ' <button type="button" class="btn btn-info chakanyuangong">查看</button>'
-                    var xiaochu;
-                     
-                        xiaochu = ' <button type="button" class="btn btn-warning remove">删除</button>'
-                     
-                    return salary + chakan + xiaochu;
-        
-         
+                    var xiaochu;               
+                    xiaochu = ' <button type="button" class="btn btn-warningremove">删除</button>'                  
+                    return salary + chakan + xiaochu;       
                    }
           
          //查询按钮事件
               $('#search_btn').click(function() {  
                 $('#grid').bootstrapTable('refresh', {
-                 url :  "http://39.105.201.140:8100/api/UserApi/GetUserList?pageIndex=10&pageSize=10"
+                 url :  "http://127.0.0.1:3000/user/login?examNum='41102534265'&pwd=123456"
                  });
                   })
           
                function getHeight() {
                  return $(window).height() - 100;
-                   }
-                    
-             
-            </script>  
-             
+               }          
+            </script>         
            <script>
             function getsetdata(){
-              var bttn="";
-        
-        
+              var bttn="";        
             }
            </script>
 </html>

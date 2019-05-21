@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-   <link rel="stylesheet" type="text/css" href="public/css/bootstrap.css">
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
           <style>
             .container{
               width: 1000px;
@@ -87,18 +87,23 @@
              </div>
           </div>
           
-          <script type="text/javascript" src="public/js/jquery.min.js"></script>
-          <script type="text/javascript" src="public/js/jquery.comment.js" ></script>
-          <script type="text/javascript" src="public/js/bootstrap.min.js"></script>
+          <script type="text/javascript" src="js/jquery.min.js"></script>
+          <script type="text/javascript" src="js/jquery.comment.js" ></script>
+          <script type="text/javascript" src="js/bootstrap.min.js"></script>
           <script type="text/javascript">
             //初始化数据
             var arr = [
-              {id:1,img:"public/img/8.jpg",replyName:"我是你老叔",beReplyName:"",content:"同学聚会，看到当年追我的屌丝开着宝马车带着他老婆来了，他老婆是我隔壁宿舍的同班同学，心里后悔极了。",time:"2019-4-17 01:42:53",address:"西安",osname:"",browse:"谷歌",replyBody:[]},
-              {id:2,img:"public/img/9.jpg",replyName:"春春666",beReplyName:"",content:"到菜市场买菜，看到一个孩子在看摊，我问：“一只鸡多少钱？” 那孩子回答：“23。” 我又问：“两只鸡多少钱？” 孩子愣了一下，一时间没算过来，急中生智大吼一声：“一次只能买一只！”",time:"2017-10-17 11:42:53",address:"西安",osname:"",browse:"谷歌",replyBody:[{id:3,img:"",replyName:"帅大叔",beReplyName:"匿名",content:"来啊，我们一起吃鸡",time:"2017-10-17 11:42:53",address:"",osname:"",browse:"谷歌"}]},
-              {id:3,img:"public/img/10.jpg",replyName:"倒转流年只为你一眼红颜",beReplyName:" ",content:"同学聚会，看到当年追我的屌丝开着宝马车带着他老婆来了，他老婆是我隔壁宿舍的同班同学，心里后悔极了。",time:"2017-10-17 11:42:53",address:"西安",osname:"win10",browse:"谷歌",replyBody:[]},
-              {id:3,img:"public/img/11.jpg",replyName:"倒转流年只为你一眼红颜",beReplyName:" ",content:"悟空和唐僧一起上某卫视非诚勿扰,悟空上台,24盏灯全灭。理由:1.没房没车只有一根破棍. 2.保镖职业危险.3.动不动打妖精,对女生不温柔. 4.坐过牢,曾被压五指山下500年。唐僧上台，哗!灯全亮。 理由:1.公务员； 2.皇上兄弟，后台最硬 3.精通梵文等外语 4.长得帅 5.最关键一点：有宝马！",time:"2017-10-17 21:32:55",address:"西安",osname:"win10",browse:"IE",replyBody:[{id:4,img:"",replyName:"倒转流年只为你一眼红颜",beReplyName:"帅大叔",content:"来啊，我们一起吃鸡",time:"2019-5-18 11:42:53",address:"",osname:"",browse:"谷歌"}]},
-              {id:3,img:"public/img/12.jpg",replyName:"。。。。。。",beReplyName:"匿名",content:"白羊：记不清人；金牛：悔未上床；双子：他（她）是青蛙（恐龙）；巨蟹：善哉善哉；狮子：一脚蹬开；处女：倒大霉了；天秤：感觉很好；天蝎：你死我活；射手：有多少次；摩羯：气死我也；水瓶：奶奶个熊；双鱼：还是想他（她）",time:"2019-3-17 15:48:53",address:"西安",osname:"win10",browse:"谷歌",replyBody:[]},
-              {id:3,img:"public/img/13.jpeg",replyName:"春天",beReplyName:" ",content:"如果给你一次去西天取经的机会，选3个做你的徒弟，你会选谁？⒈多啦A梦。⒉柯南。⒊蜡笔小新。⒋樱木花道。⒌悟空。⒌大力水手。⒍超人。⒎功夫熊猫。⒏美少女战士。⒐路飞。⒑漩涡鸣人。⒒奥特曼。⒓卡卡西。⒔喜羊羊。⒕蜘蛛侠。⒖百变小樱。⒗忍者神龟。⒘变形金刚。⒙八神庵。⒚杀生丸。⒛阿童木",time:"2019-05-18 12:42:53",address:"西安",osname:"win8",browse:"火狐",replyBody:[]}
+              {id:1,img:"img/8.jpg",replyName:"萌萌哒土豆",beReplyName:"",content:"给大家说个早安，看图猜剧有没有看过的(*^__^*)猜对有奖励",time:"2019-4-17 01:42:53",address:"西安",osname:"",browse:"谷歌",replyBody:[]},
+
+              {id:2,img:"img/10.jpg",replyName:"追梦人♪(^∇^*)",beReplyName:"",content:"【温馨提示】关于进一步加强校门出入管理的通知”",time:"2017-10-17 11:42:53",address:"西安",osname:"",browse:"谷歌",replyBody:[{id:3,img:"",replyName:"帅大叔",beReplyName:"匿名",content:"我想问，有没有那种晚上不断网的网线",time:"2017-10-17 11:42:53",address:"",osname:"",browse:"谷歌"}]},
+
+              {id:3,img:"img/9.jpg",replyName:"倒转流年",beReplyName:" ",content:"【艺考】西安交大城院2019年艺术类招生简章",time:"2017-10-17 11:42:53",address:"西安",osname:"win10",browse:"谷歌",replyBody:[]},
+
+              {id:3,img:"img/11.jpg",replyName:"brave",beReplyName:" ",content:"【校园风光】醉美城院，绝无PS!",time:"2017-10-17 21:32:55",address:"西安",osname:"win10",browse:"IE",replyBody:[{id:4,img:"",replyName:"倒转流年",beReplyName:"brave",content:"发图(☆_☆)/~~",time:"2019-5-18 11:42:53",address:"",osname:"",browse:"谷歌"}]},
+
+              {id:3,img:"img/12.jpg",replyName:"。。。。。。",beReplyName:"匿名",content:"有人会cad手绘的手绘吗",time:"2019-3-17 15:48:53",address:"西安",osname:"win10",browse:"谷歌",replyBody:[]},
+
+              {id:3,img:"img/13.jpg",replyName:"本宝宝",beReplyName:" ",content:"####有没有好吃的饭",time:"2019-05-18 12:42:53",address:"西安",osname:"win8",browse:"火狐",replyBody:[]}
             ];
             $(function(){
               $(".comment-list").addCommentList({data:arr,add:""});

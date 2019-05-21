@@ -54,26 +54,49 @@ var router=express.Router();
 //       }
 //     });
 //   });
-// // 3.用户登录:
-// router.get('/login',(req,res)=>{
-//     var uname=req.query.uname;
-//     var upwd=req.query.upwd;
-//     if(!uname){
-//         res.send('uname require');
-//         return;
-//     }
-//     if(!upwd){
-//         res.send('upwd require');
-//         return;
-//     }
-//     var sql='SELECT uid FROM person WHERE uname=? AND upwd=?';
-//     pool.query(sql,[uname,upwd],(err,result)=>{
-//         if(err) throw err;
-//         if(result.length>0){
-//             res.send({code:200,msg:'login suc'});
-//         }else{
-//             res.send('登录失败,用户名或密码错误');
-//         }
-//     })
-// })
+// 1.学生登录:
+router.get('/login',(req,res)=>{
+    var examNum=req.query.examNum;
+    var pwd=req.query.pwd;
+    if(!examNum){
+        res.send('examNum require');
+        return;
+    }
+    if(!pwd){
+        res.send('pwd require');
+        return;
+    }
+    var sql='SELECT id FROM student WHERE examNum=? AND pwd=?';
+    pool.query(sql,[examNum,pwd],(err,result)=>{
+        if(err) throw err;
+        // console.log(result);
+        if(result.length>0){
+            res.send({code:200,msg:'login suc'});   
+        }else{
+            res.send('登录失败,准考证号或或密码错误');
+        }
+    })
+})
+// 2.管理员登录:
+router.get('/managelogin',(req,res)=>{
+    var adminName=req.query.adminName;
+    var pwd=req.query.pwd;
+    if(!adminName){
+        res.send('adminName require');
+        return;
+    }
+    if(!pwd){
+        res.send('pwd require');
+        return;
+    }
+    var sql='SELECT id FROM admin WHERE adminName=? AND pwd=?';
+    pool.query(sql,[adminName,pwd],(err,result)=>{
+        if(err) throw err;
+        if(result.length>0){
+            res.send({code:200,msg:'login suc'});
+        }else{
+            res.send('登录失败,准考证号或密码错误');
+        }
+    })
+})
 module.exports=router;

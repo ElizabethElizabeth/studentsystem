@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生登录</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        body{
+            background: url(img/background.jpg) no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .top{
+            background: #ddc;
+            padding: 5px 10px;
+        }
+        .top a:nth-child(2){
+            margin-left: 910px;
+        }
+        .card{
+            position: absolute;
+            top: 200px;
+            left: 190px;
+        }
+        a{
+            text-decoration: none;
+            color:#000;
+        }
+        .button{
+            display: inline-block;
+            background: url(img/button.png) no-repeat;
+            width: 68px;
+            text-align: center;
+            margin: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h5 class="top">
+        <span>欢迎来到大学新生预录取系统</span>
+        <a href="javascript:;">收藏本站</a>
+        <a href="javascript:;">设为首页</a>
+        <a href="managelogin.html">管理员入口>></a>
+    </h5>
+    <div class="card">
+        <img src="img/logo1.png">
+        <div class="flex">
+            <div>
+                <img src="img/touxiang.png" alt="">
+            </div>
+            <form action="/user/login" method="get">
+                <div>
+                    <br>
+                    考生号: <input type="text" name="examNum" id="examNum"><br>
+                    密&nbsp;&nbsp;&nbsp;&nbsp;码: <input type="password" name="pwd" id="pwd"><a href="javascript:;">忘记密码？</a><br>
+                    <button class="button" onclick="login()">登录</button><a href="javascript:;" class="button">登录说明</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function login(){
+            // 1.创建ajax对象
+            var xhr=new XMLHttpRequest();
+            // 2.绑定监听
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4&&xhr.status==200){
+                    var result=xhr.responseText;
+                    alert(result);
+                }
+            }
+            // 3.创建请求
+            var loginUrl="/user/login?examNum="+examNum.value+"&pwd="+pwd.value;
+            xhr.open("get",loginUrl,true);
+            // 4.发送请求
+            xhr.send(null);
+        }
+    </script>
+</body>
+</html>
