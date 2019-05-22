@@ -1,225 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="bootstrap-table/dist/bootstrap-table.css">
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-    
- 
-  <!-- js -->  
-    <script src="js/jquery.min.js"></script>
-    <!-- <script src="../public/js/popper.min.js"></script> -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="bootstrap-table/dist/bootstrap-table.js"></script>
-    <script src="bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
-    <script src="1/WdatePicker.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 <body>
-    <div class="container"> 
-    <h2>新生个人信息查询</h2>
-    <div id="app"style=" background-color:#f2f2f2; width:100%; font-size:1em;"  >
-        <div style=" height:5em;  padding: 1.2em;margin-left:2em;" > 
-             
-            <span > 开始时间:<input id="startTime" name="startTime" type="text" style="border-radius: 0.4em; border:blue;width:9em;height:2em"onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value=""> </span>
-            <span >结束时间:<input id="EndTime"  name="EndTime" type="text" style="border-radius: 0.4em; border:blue;width:9em;height:2em" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value=""></span>
-            <span>关键字：<input type="text"  style=" border-radius:  0.4em; border:blue;width:9em;height:2em;text-align: center" name="fname" placeholder="姓名 " id="search_tel" ></span>
-            <div  style="display:inline-block"> 
-                <a href="#" style="  text-decoration: none;color: black">诉求类型：</a><select id="Source" class="form-control mt-0" name="Source" style="width: 160px;float: right;"value="选择">
-                    <option></option>
-                <option value="2" selected="selected">涉众</option><option  >涉军</option> <option>其他</option> </select>               
-            </div>
-            
-            <button class="btn btn-primary  "    style="border-radius:0.25em;"  id="search_btn" >查询</button>
-              <br>
-             <div style="display:inline-block"> 
-
-             
-            </div>
-            
-         </div>
-             
-    </div>
-    </div>   
-           <table id="grid" class="table  table-hover "  ></table>
-           <script type="text/javascript">
-   
-            $(function(){
-                     InitMainTable($table);
-            })
-            var $table;
-                 //初始化bootstrap-table的内容
-                 function InitMainTable () {
-                     //记录页面bootstrap-table全局变量$table，方便应用
-                     var queryUrl = "127.0.0.1:3000/matriculate/student"
-                    
-                     var $table = $("#grid").bootstrapTable({
-                      
-                         height:getHeight(),
-                          method: 'get',
-                         dataType: 'json',
-                         contentType: 'application/x-www-form-urlencoded',
-                         url: queryUrl,                      //请求后台的URL（*）
-                         paginationLoop: true,
-                        //toolbar: '#toolbar',              //工具按钮用哪个容器
-                        striped: true,                      //是否显示行间隔色
-                        cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-                        pagination: true,                   //是否显示分页（*）
-                        sortable: true,                     //是否启用排序
-                        sortOrder: "desc",                   //排序方式
-                        sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
-                        DataCount:426,
-                        pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
-                        pageSize: 10,                           //每页的记录行数（*）
-                        pageList: [5, 10, 15, 20],      //可供选择的每页的行数（*）
-                        search: true,                      //是否显示表格搜索
-                        // strictSearch: true,
-                        showColumns: false,                  //是否显示所有的列（选择显示的列）
-                        showRefresh: true,                  //是否显示刷新按钮
-                        // minimumCountColumns: 2,             //最少允许的列数
-                        clickToSelect: true,                //是否启用点击选中行
-                        uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
-                        showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
-                        cardView: false,                    //是否显示详细视图
-                        detailView: false,  
-                        showExport: true, 
-                        queryParamsType:'undefined',                 //是否显示父子表
-                        queryParams : function (params) {
-                            //  这里的键的名字和控制器的变量名必须一直，这边改动，控  也需要改成一样的
-                            //  console.log(params.limit)
-                            //  var temp = {   
-                            //  DataCount=params.result.DataCount
-                                        
-                            //  PageCount:params.PageCount,
-                            //  PageIndex:params. PageIndex,
-                            //  PageSize:params.PageSize  
-                            //     };
-                            //       console.log(temp)
-                            return {
-                                        pageNum: params.offset+1,
-                                        pageSize: params.limit,
-                                        // date:faildate
-                            };
-                        },
-        
-        
-                        rowStyle: function (row, index) {
-                         var classesArr = ['success', 'info'];
-                         var strclass = "";
-                         if (index % 2 === 0) {//偶数行
-                             strclass = classesArr[0];
-                         } else {//奇数行
-                             strclass = classesArr[1];
-                         }
-                         return { classes: strclass };
-                       },//隔行变色
-                      responseHandler: function responseHandler(res) {
-                             var data1=JSON.parse(res);
-                            // // //  var total=JSON.parse(data1.Data.DataCount)  
-                             var result = JSON.parse(data1.Data);
-                            //  var rowss =result.Result;
-                            //  var total = result.DataCount;
-                        
-                             return {
-                            "total": result.PageIndex,//总页数
-                            
-                            "rows":  result.Result//数据
-                         };
-         
-                         },
-                   columns: [  
-                      {
-                        checkbox: true,    visible: true  
-                      },
-                      {
-                        field:"id", title: '编号', align: 'center', valign: 'middle',  width:'200', sortable: true,       
-                      },
-                      {
-                       field: "sname", title: '姓名', align: 'center', valign: 'middle',  width:'100',  sortable: true,   
-                      },
-                      {
-                       field: "age", title: '年龄', align: 'center', valign: 'middle',  width:'100',  sortable: true,
-                        
-                      },
-                      {
-                       field: "idNum", title: '学生编号', align: 'center', valign: 'middle',  width:'100',  sortable: true,
-                        
-                      },
-                      {
-                       field: "examNum", title: '准考证号', align: 'center', valign: 'middle',  width:'100',  sortable: true,
-                        
-                      },
-                      {
-                       field: "admitNum", title: '考生号', align: 'center',   valign: 'middle',width:'100',  sortable: true,
-                      },           
-                      {
-                      field:"school", title: '毕业学校', align: 'center',valign: 'middle',  width:'200',   sortable: true,
-                      },
-                      {
-                       field: "telephone", title: '电话', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      },
-                      {
-                       field: "mobile", title: '手机号', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      },
-                      {
-                       field: "email", title: '电子邮件', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      },
-                      {
-                       field: "pwd", title: '密码', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      }, 
-                      {
-                       field: "gender", title: '性别', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      }, 
-                      {
-                       field: "addressH", title: '家庭地址', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      },
-                      {
-                       field: "addressR", title: '收货地址', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      },
-                      {
-                       field: "confirm", title: '是/否', align: 'center', valign: 'middle',width:'200',   sortable: true
-                      },
-                      {
-                          field:'nnn',   title: '操作',  width: 200,  align: 'center',  valign: 'middle', formatter: actionFormatter
-                      }
-                         
-                   ],
-                      onLoadSuccess: function () {
-                        console.log("加载成功")  
-                                
-                             },
-                      onLoadError: function () {
-                        console.log("数据加载失败！");
-                       },
-                     };
-                };    
-                    function actionFormatter(value, row, index) {
-                        var salary = '<button type="button" class="btn btn-primary gongzichakan"   data-toggle="modal" data-target="#myModal111">详情</button>'
-         
-                    var chakan = ' <button type="button" class="btn btn-info chakanyuangong">查看</button>'
-                    var xiaochu;               
-                    xiaochu = ' <button type="button" class="btn btn-warningremove">删除</button>'                  
-                    return salary + chakan + xiaochu;       
-                   }
-          
-         //查询按钮事件
-              $('#search_btn').click(function() {  
-                $('#grid').bootstrapTable('refresh', {
-                 url :  "http://127.0.0.1:3000/user/login?examNum='41102534265'&pwd=123456"
-                 });
-                  })
-          
-               function getHeight() {
-                 return $(window).height() - 100;
-               }          
-            </script>         
-           <script>
-            function getsetdata(){
-              var bttn="";        
-            }
-           </script>
+  <h3>新生个人信息查询</h3>
+  <table>
+    <tr>
+      <td>真实姓名</td>
+      <td>手机</td>
+    </tr>
+    <tr>
+      <td>年龄</td>
+      <td>电话</td>
+    </tr>
+    <tr>
+      <td>身份证号</td>
+      <td>性别</td>
+    </tr>
+    <tr>
+      <td>准考证号</td>
+      <td>家庭地址</td>
+    </tr>
+    <tr>
+      <td>录取编号</td>
+      <td>收录取通知书地址</td>
+    </tr>
+    <tr>
+      <td>毕业学校</td>
+      <td>是否已确认录取</td>
+    </tr>
+  </table>
+</body>
 </html>

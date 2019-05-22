@@ -59,11 +59,11 @@ router.get('/login',(req,res)=>{
     var examNum=req.query.examNum;
     var pwd=req.query.pwd;
     if(!examNum){
-        res.send('examNum require');
+        res.send({code:0, msg:'examNum require'});
         return;
     }
     if(!pwd){
-        res.send('pwd require');
+        res.send({code:0, msg:'pwd require'});
         return;
     }
     var sql='SELECT id FROM student WHERE examNum=? AND pwd=?';
@@ -73,20 +73,20 @@ router.get('/login',(req,res)=>{
         if(result.length>0){
             res.send({code:200,msg:'login suc'});   
         }else{
-            res.send('登录失败,准考证号或或密码错误');
+            res.send({code:0, msg:'登录失败,准考证号或密码错误'});
         }
     })
 })
 // 2.管理员登录:
 router.get('/managelogin',(req,res)=>{
-    var adminName=req.query.adminName;
-    var pwd=req.query.pwd;
+    var adminName=req.body.adminName;
+    var pwd=req.body.pwd;
     if(!adminName){
-        res.send('adminName require');
+        res.send({code:0, msg: 'adminName require'});
         return;
     }
     if(!pwd){
-        res.send('pwd require');
+        res.send({code:0, msg: 'pwd require'});
         return;
     }
     var sql='SELECT id FROM admin WHERE adminName=? AND pwd=?';
@@ -95,8 +95,60 @@ router.get('/managelogin',(req,res)=>{
         if(result.length>0){
             res.send({code:200,msg:'login suc'});
         }else{
-            res.send('登录失败,准考证号或密码错误');
+            res.send({code:0,msg:'登录失败,用户名或密码错误'});
         }
     })
+})
+// 3. 管理员修改密码: 
+router.get("/managechangepwd",(req,res)=>{
+    var uid=req.query.uid;
+    var oldpwd=req.query.oldpwd;
+    var newpwd=req.query.newpwd;
+    if(uid&&oldpwd&&newpwd){
+        var sql="select * from admin where id=? and pwd=?"
+        pool.query(sql,[uid,oldpwd],(err,result)=>{
+            if(err){ console.log(err); }
+            else if(result.length==0){
+                res.send({code:0, msg:"修改失败！原密码不正确！"})
+            }else{
+                var sql="update admin set pwd=? where id=?";
+                pool.query(sql,[newpwd,uid],(err,result)=>{
+                    if(err){console.log(err);}
+                    else{
+                        res.send({code:200, msg:"修改成功！"})
+                    }
+                })
+            }
+        })
+    }else{
+        res.send({code:0, msg:"必须填写原密码和新密码！"});
+    }
+    
+})
+// 4. 学生修改密码: 
+router.get("/changepwd",(req,res)=>{
+    var examNum=req.query.examNum;
+    var oldpwd=req.query.oldpwd;
+    var newpwd=req.query.newpwd;
+    if(examNum&&oldpwd&&newpwd){
+        var sql="select * from student where examNum=? and pwd=?"
+        pool.query(sql,[examNum,oldpwd],(err,result)=>{
+            if(err){ console.log(err); }
+            else if(result.length==0){
+                res.send({code:0, msg:"修改失败！原密码不正确！"})
+            }else{
+                var sql="update student set pwd=? where examNum=?";
+                pool.query(sql,[newpwd,examNum],(err,result)=>{
+                    if(err){console.log(err);}
+                    else{
+                        res.send({code:200, msg:"修改成功！"})
+                    }
+                })
+            }
+        })
+    }else{
+        res.send({code:0, msg:"必须填写正确的原密码和新密码！"});
+    }
+    
 })
 module.exports=router;

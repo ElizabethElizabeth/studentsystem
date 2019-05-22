@@ -28,7 +28,7 @@
             text-decoration: none;
             color:#000;
         }
-        .button{
+        .button1{
             display: inline-block;
             background: url(img/button.png) no-repeat;
             width: 68px;
@@ -50,32 +50,36 @@
             <div>
                 <img src="img/touxiang.png" alt="">
             </div>
-            <form action="/user/login" method="get">
+            <form>
                 <div>
                     <br>
                     考生号: <input type="text" name="examNum" id="examNum"><br>
                     密&nbsp;&nbsp;&nbsp;&nbsp;码: <input type="password" name="pwd" id="pwd"><a href="javascript:;">忘记密码？</a><br>
-                    <button class="button" onclick="login()">登录</button><a href="javascript:;" class="button">登录说明</a>
+                    <button type="button" class="button1" onclick="login()">登录</button><a href="javascript:;" class="button1">登录说明</a>
                 </div>
             </form>
         </div>
     </div>
+    <script src="js/jquery-1.11.3.js"></script>
     <script>
         function login(){
-            // 1.创建ajax对象
-            var xhr=new XMLHttpRequest();
-            // 2.绑定监听
-            xhr.onreadystatechange=function(){
-                if(xhr.readyState==4&&xhr.status==200){
-                    var result=xhr.responseText;
-                    alert(result);
+            $.ajax({
+                url:"/user/login",
+                type:"get",
+                data:{
+                    examNum:$("[name=examNum]").val(),
+                    pwd:$("[name=pwd]").val()
+                },
+                dataType:"json",
+                success:function(res){
+                    if(res.code==0){
+                        alert(res.msg);
+                    }else{
+                        alert("登录成功！");
+                        location.href="index1.html";
+                    }
                 }
-            }
-            // 3.创建请求
-            var loginUrl="/user/login?examNum="+examNum.value+"&pwd="+pwd.value;
-            xhr.open("get",loginUrl,true);
-            // 4.发送请求
-            xhr.send(null);
+            })
         }
     </script>
 </body>
