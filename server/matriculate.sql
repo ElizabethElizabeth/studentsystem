@@ -102,15 +102,16 @@ INSERT INTO confirm VALUES("student5",41102534269,0129,610481199706141824,"已�
 
 -- 学费信息表
 CREATE TABLE tuition(
+    tid INT PRIMARY KEY AUTO_INCREMENT,
     department VARCHAR(100),
     fee VARCHAR(100),
     deptelephone VARCHAR(100)
 ); 
-INSERT INTO tuition VALUES("新闻与传播类","17000/学年",029-38252930);
-INSERT INTO tuition VALUES("经管类","17000/学年",029-38252931);
-INSERT INTO tuition VALUES("理工科类","17000/学年",029-38252932);
-INSERT INTO tuition VALUES("外语类","17000/学年",029-38252933);
-INSERT INTO tuition VALUES("护理学","17000/学年",029-38252934);
-INSERT INTO tuition VALUES("通讯工程(中兴卓越班)","20000/学年",029-38252935);
-INSERT INTO tuition VALUES("艺术类","20000/学年",029-38252936);
-INSERT INTO tuition VALUES("播音与主持艺术(航空服务方向)","23000/学年",029-38252937);
+INSERT INTO tuition VALUES(null,"新闻与传播类","17000/学年",029-38252930);
+INSERT INTO tuition VALUES(null,"经管类","17000/学年",029-38252931);
+INSERT INTO tuition VALUES(null,"理工科类","17000/学年",029-38252932);
+INSERT INTO tuition VALUES(null,"外语类","17000/学年",029-38252933);
+INSERT INTO tuition VALUES(null,"护理学","17000/学年",029-38252934);
+INSERT INTO tuition VALUES(null,"通讯工程(中兴卓越班)","20000/学年",029-38252935);
+INSERT INTO tuition VALUES(null,"艺术类","20000/学年",029-38252936);
+INSERT INTO tuition VALUES(null,"播音与主持艺术(航空服务方向)","23000/学年",029-38252937);
