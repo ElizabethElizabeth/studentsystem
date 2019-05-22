@@ -23,12 +23,12 @@
    <section>
     <img src="img/logo.png">
     <!-- 修改密码 -->
-    <div class="pwdcard inline-block">
-        <form action="/user/changepwd" method="get">
+    <div class="pwdcard">
+        <form>
           准考证号:<input type="text" name="examNum"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;原密码:<input type="password" name="oldpwd"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;新密码:<input type="password" name="newpwd"><br>
-          <button onclick="changePwd()">确定</button>
+          <button type="button" onclick="changePwd()">确定</button>
         </form>
     </div>
     
@@ -71,9 +71,9 @@
 </script>
 <script>
   // 显示密码框
-  var pwdcard=document.getElementsByClassName("pwdcard");
+  var pwdcard=document.getElementsByClassName("pwdcard")[0];
   function showPwdcard(){
-    pwdcard.style.display="inline-block";
+    pwdcard.style.display="block";
   }
 </script>
 <script src="js/jquery-1.11.3.js"></script>
@@ -94,14 +94,14 @@
                     alert(res.msg);
                 }else{
                     alert("修改密码成功！");
-                    location.href="index1.html";
+                    pwdcard.style.display="none";
                 }
             }
         })
     }
 </script>
 <script type="text/javascript">
-$.backstretch([
+/*$.backstretch([
       'http://api.asilu.com/cdn/img/bg/444.jpg',
       'http://api.asilu.com/cdn/img/bg/446.jpg',
       'http://api.asilu.com/cdn/img/bg/447.jpg',
@@ -109,7 +109,7 @@ $.backstretch([
   ], {
       fade : 1000, // 动画时长
       duration : 2000 // 切换延时
-});
+});*/
 </script>
 </body>
 </html>

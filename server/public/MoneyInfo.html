@@ -22,152 +22,81 @@
     <div class="container">
       <h3>2018年西安交通大学城市学院学费标准</h3>
       <p>学院遵循属地原则，收费按在陕西省物价局备案的标准执行</p>
-      <table id="grid" class="table table-hover "></table>
+      <div class="bootstrap-table">
+        <div class="fixed-table-toolbar"><div class="columns columns-right btn-group pull-right"><button class="btn btn-default" type="button" name="refresh" aria-label="Refresh" title="刷新">
+          <i class="glyphicon glyphicon-refresh icon-refresh"></i>
+          </button><button class="btn btn-default" type="button" name="toggle" aria-label="Toggle" title="切换">
+          <i class="glyphicon glyphicon-list-alt icon-list-alt"></i>
+          </button></div><div class="pull-right search ">
+          <input class="form-control" type="text" placeholder="搜索">
+          </div></div>
+        
+        <div class="fixed-table-container fixed-height" style="height: 1092px; padding-bottom: 36px;">
+        <div class="fixed-table-header" style="margin-right: 0px;"><table class="table table-hover  table-bordered" style="width: 720px;"><thead class=""><tr><th style="text-align: center; vertical-align: middle; width: 200px; " data-field="Id"><div class="th-inner sortable both">系别</div><div class="fht-cell" style="width: 369px;"></div></th><th style="text-align: center; vertical-align: middle; width: 100px; " data-field="Name"><div class="th-inner sortable both">学费</div><div class="fht-cell" style="width: 138px;"></div></th><th style="text-align: center; vertical-align: middle; width: 100px; " data-field="UnitName"><div class="th-inner sortable both">各系相关联系电话</div><div class="fht-cell" style="width: 209px;"></div></th></tr></thead></table></div>
+        <div class="fixed-table-body">
+        <div class="fixed-table-loading table table-bordered table-hover fixed-table-border" style="top: 37px; display: none; width: 720px;">
+        <span class="loading-wrap">
+        <span class="loading-text">正在努力地加载数据中，请稍候</span>
+        <span class="animation-wrap"><span class="animation-dot"></span></span>
+        </span>
+        </div>
+        <table id="grid" class="table table-hover  table-bordered" style="margin-top: -36px;"><thead class=""><tr><th style="text-align: center; vertical-align: middle; width: 200px; " data-field="Id"><div class="th-inner sortable both">系别</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; width: 100px; " data-field="Name"><div class="th-inner sortable both">学费</div><div class="fht-cell"></div></th><th style="text-align: center; vertical-align: middle; width: 100px; " data-field="UnitName"><div class="th-inner sortable both">各系相关联系电话</div><div class="fht-cell"></div></th></tr></thead>
+          <tbody id="tbody">
+            <tr class="success" data-index="0">
+              <td style="text-align: center; vertical-align: middle; width: 200px; ">b375289f92d3406e99eadb7d0eec01f6</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">郭平社委员</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">厅党委委员</td>
+            </tr>
+            <tr class="info" data-index="1">
+              <td style="text-align: center; vertical-align: middle; width: 200px; ">c0c55769dc4b44f3b89d5ca25579f559</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">新闻中心</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">新闻中心</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="fixed-table-border" style="height: 686px;"></div></div>
+        <div class="fixed-table-footer" style="display: none;"><table><thead><tr></tr></thead></table></div>
+        </div>
+        <div class="fixed-table-pagination" style="display: block;"><div class="pull-left pagination-detail">
+        <span class="pagination-info">
+        显示第 1 到第 10 条记录，总共 10 条记录
+        </span><span class="page-list">每页显示 <span class="btn-group dropdown dropup">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="page-size">
+          10
+          </span>
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu"><li role="menuitem" class=""><a href="#">5</a></li><li role="menuitem" class="active"><a href="#">10</a></li></ul></span> 条记录</span></div><div class="pull-right pagination" style="display: none;"><ul class="pagination"><li class="page-item page-pre"><a class="page-link" href="#">‹</a></li><li class="page-item active"><a class="page-link" href="#">1</a></li><li class="page-item page-next"><a class="page-link" href="#">›</a></li></ul></div></div>
+        </div>
     </div>
-    <script type="text/javascript">
-        $(function(){
-                 InitMainTable($table);
-        })
-        var $table;
-             //初始化bootstrap-table的内容
-             function InitMainTable () {
-                 //记录页面bootstrap-table全局变量$table，方便应用
-                 var queryUrl = "http://39.105.201.140:8100/api/UserApi/GetUserList?pageIndex=0&pageSize=10"
-                
-                 var $table = $("#grid").bootstrapTable({
-                  
-                     height:getHeight(),
-                      method: 'get',
-                     dataType: 'json',
-                     contentType: 'application/x-www-form-urlencoded',
-                     url: queryUrl,                      //请求后台的URL（*）
-                     paginationLoop: true,
-                    //toolbar: '#toolbar',              //工具按钮用哪个容器
-                    striped: true,                      //是否显示行间隔色
-                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-                    pagination: true,                   //是否显示分页（*）
-                    sortable: true,                     //是否启用排序
-                    sortOrder: "desc",                   //排序方式
-                    sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
-                    DataCount:426,
-                    pageNumber: 1,                      //初始化加载第一页，默认第一页,并记录
-                    pageSize: 10,                           //每页的记录行数（*）
-                    pageList: [5, 10, 15, 20],      //可供选择的每页的行数（*）
-                    search: true,                      //是否显示表格搜索
-                    // strictSearch: true,
-                    showColumns: false,                  //是否显示所有的列（选择显示的列）
-                    showRefresh: true,                  //是否显示刷新按钮
-                    // minimumCountColumns: 2,             //最少允许的列数
-                    clickToSelect: true,                //是否启用点击选中行
-                    uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
-                    showToggle: true,                   //是否显示详细视图和列表视图的切换按钮
-                    cardView: false,                    //是否显示详细视图
-                    detailView: false,  
-                    showExport: true, 
-                    queryParamsType:'undefined',                 //是否显示父子表
-                     queryParams : function (params) {
-                        //  这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-                        //  console.log(params.limit)
-                  //  var temp = {   
-                  //            DataCount=params.result.DataCount
-                             
-                  //          PageCount:params.PageCount,
-                  //          PageIndex:params. PageIndex,
-                  //          PageSize:params.PageSize  
-                  //     };
-                  //       console.log(temp)
-                  return {
-                              pageNum: params.offset+1,
-                              pageSize: params.limit,
-                              // date:faildate
-                            };
-     
-                    },
-    
-    
-                    rowStyle: function (row, index) {
-                     var classesArr = ['success', 'info'];
-                     var strclass = "";
-                     if (index % 2 === 0) {//偶数行
-                         strclass = classesArr[0];
-                     } else {//奇数行
-                         strclass = classesArr[1];
-                     }
-                     return { classes: strclass };
-                   },//隔行变色
-                  responseHandler: function responseHandler(res) {
-                         var data1=JSON.parse(res);
-                        // // //  var total=JSON.parse(data1.Data.DataCount)  
-                         var result = JSON.parse(data1.Data);
-                        //  var rowss =result.Result;
-                        //  var total = result.DataCount;
-                    
-                         return {
-                        "total": result.PageIndex,//总页数
-                        
-                        "rows":  result.Result//数据
-                     };
-     
-                     },
-               columns: [
-                
-                
-                 {
-                    field:"Id", title: '系别', align: 'center', valign: 'middle',  width:'200', sortable: true,
-                    
-                },
-               {
-                   field: "Name", title: '学费', align: 'center', valign: 'middle',  width:'100',  sortable: true,
-                    
-               },
-               
-                {
-                    field: "UnitName", title: '各系相关联系电话', align: 'center', valign: 'middle',width:'100',  sortable: true,
-                },
-     
-                
-                     
-                  ],
-                  onLoadSuccess: function () {
-                    console.log("加载成功")  
-                            
-                         },
-                  onLoadError: function () {
-                    console.log("数据加载失败！");
-                   },
-                 });
-                };
-     
-     
-     
-                function actionFormatter(value, row, index) {
-                    var salary = '<button type="button" class="btn btn-primary gongzichakan"   data-toggle="modal" data-target="#myModal111">详情</button>'
-     
-                var chakan = ' <button type="button" class="btn btn-info chakanyuangong">查看</button>'
-                var xiaochu;
-                 
-                    xiaochu = ' <button type="button" class="btn btn-warning remove">删除</button>'
-                 
-                return salary + chakan + xiaochu;
-    
-     
-               }
-      
-     //查询按钮事件
-          $('#search_btn').click(function() {  
-            $('#grid').bootstrapTable('refresh', {
-             url :  "http://39.105.201.140:8100/api/UserApi/GetUserList?pageIndex=10&pageSize=10"
-             });
-              })
-      
-           function getHeight() {
-             return $(window).height() - 100;
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+      $.ajax({
+        url:"/money",
+        type:"get",
+        dataType:"json",
+        success:function(result){
+          var html="";
+          for(var i=0;i<result.length;i++){
+            var t=result[i]
+            if(i%2==0){
+              html+=`<tr class="success" data-index="${i}" data-tid="${t.tid}">
+              <td style="text-align: center; vertical-align: middle; width: 200px; ">${t.department}</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">¥${t.fee}</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">${t.deptelephone}</td>
+            </tr>`
+            }else{
+              html+=`<tr class="info" data-index="${i}" data-tid="${t.tid}">
+              <td style="text-align: center; vertical-align: middle; width: 200px; ">${t.department}</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">¥${t.fee}</td>
+              <td style="text-align: center; vertical-align: middle; width: 100px; ">${t.deptelephone}</td>
+            </tr>`
+            }
           }
-        </script>         
-       <script>
-        function getsetdata(){
-          var bttn="";  
+          $("#tbody").html(html);
         }
-       </script>
+      })
+    </script>
 </body>
 </html>

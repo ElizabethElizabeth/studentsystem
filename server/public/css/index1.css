@@ -99,10 +99,16 @@ a{
   display: flex;
 }
 .pwdcard{
+  position:fixed;
+  display:none;
+  left:50%; top:50%;
+  margin-left:-150px;
+  margin-top:-50px;
+  box-sizing: border-box;
+  width:300px; height:100px;
   border: 1px solid #aac;
   background: #ddc;
   padding: 5px 10px;
   border-radius: 4px;
   box-shadow: 2px 3px #aac;
-  margin-left: 195px;
 }
