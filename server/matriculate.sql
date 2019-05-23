@@ -75,7 +75,7 @@ INSERT INTO dormClass VALUES("student1",41102534265,1,"计算机科学与信息�
 INSERT INTO dormClass VALUES("student2",41102534266,1,"计算机科学与信息管理系","计算机151班","2号楼","2#259");
 INSERT INTO dormClass VALUES("student3",41102534267,0,"外语系","日语152班","4号楼","2#213");
 INSERT INTO dormClass VALUES("student4",41102534268,0,"经管系","国贸151班","2号楼","2#261");
-INSERT INTO dormClass VALUES("student5",41102534269,1,"艺术系","国画151班","2号楼","4#460");
+INSERT INTO dormClass VALUES("student5",41102534269,1,"艺术系","国画151班","4号楼","4#460");
 
 -- 录取确认表
 CREATE TABLE confirm(
