@@ -28,7 +28,7 @@
           准考证号:<input type="text" name="examNum"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;原密码:<input type="password" name="oldpwd"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;新密码:<input type="password" name="newpwd"><br>
-          <button type="button" onclick="changePwd()">确定</button>
+          <button type="button" onclick="changePwd()">提交</button>
         </form>
     </div>
     
@@ -69,6 +69,17 @@
   }
   
 </script>
+<script type="text/javascript">
+  $.backstretch([
+        'http://api.asilu.com/cdn/img/bg/444.jpg',
+        'http://api.asilu.com/cdn/img/bg/446.jpg',
+        'http://api.asilu.com/cdn/img/bg/447.jpg',
+        'http://api.asilu.com/cdn/img/bg/448.jpg'
+    ], {
+        fade : 1000, // 动画时长
+        duration : 2000 // 切换延时
+  });
+</script>
 <script>
   // 显示密码框
   var pwdcard=document.getElementsByClassName("pwdcard")[0];
@@ -100,16 +111,6 @@
         })
     }
 </script>
-<script type="text/javascript">
-/*$.backstretch([
-      'http://api.asilu.com/cdn/img/bg/444.jpg',
-      'http://api.asilu.com/cdn/img/bg/446.jpg',
-      'http://api.asilu.com/cdn/img/bg/447.jpg',
-      'http://api.asilu.com/cdn/img/bg/448.jpg'
-  ], {
-      fade : 1000, // 动画时长
-      duration : 2000 // 切换延时
-});*/
-</script>
+
 </body>
 </html>

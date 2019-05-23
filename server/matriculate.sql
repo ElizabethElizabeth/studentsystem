@@ -64,17 +64,18 @@ INSERT INTO payment VALUES(5,"student5",1,18089112326,"艺术系","国画151班"
 -- 宿舍班级表
 CREATE TABLE dormClass(
     sname VARCHAR(100),
+    examNum VARCHAR(100),
     gender VARCHAR(100),
     department VARCHAR(100),
     class VARCHAR(100),
     buildings VARCHAR(100),
     houseNumber VARCHAR(100)
 ); 
-INSERT INTO dormClass VALUES("student1",1,"计算机科学与信息管理系","计算机151班","2号楼","2#259");
-INSERT INTO dormClass VALUES("student2",1,"计算机科学与信息管理系","计算机151班","2号楼","2#259");
-INSERT INTO dormClass VALUES("student3",0,"外语系","日语152班","4号楼","2#213");
-INSERT INTO dormClass VALUES("student4",0,"经管系","国贸151班","2号楼","2#261");
-INSERT INTO dormClass VALUES("student5",1,"艺术系","国画151班","2号楼","4#460");
+INSERT INTO dormClass VALUES("student1",41102534265,1,"计算机科学与信息管理系","计算机151班","2号楼","2#259");
+INSERT INTO dormClass VALUES("student2",41102534266,1,"计算机科学与信息管理系","计算机151班","2号楼","2#259");
+INSERT INTO dormClass VALUES("student3",41102534267,0,"外语系","日语152班","4号楼","2#213");
+INSERT INTO dormClass VALUES("student4",41102534268,0,"经管系","国贸151班","2号楼","2#261");
+INSERT INTO dormClass VALUES("student5",41102534269,1,"艺术系","国画151班","2号楼","4#460");
 
 -- 录取确认表
 CREATE TABLE confirm(
