@@ -25,6 +25,7 @@
     <!-- 修改密码 -->
     <div class="pwdcard">
         <form>
+          <p style="text-align:right"><img id="x" style="width:22px; height:23px" src="img/x.png"></p>
           准考证号:<input type="text" name="examNum"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;原密码:<input type="password" name="oldpwd"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;新密码:<input type="password" name="newpwd"><br>
@@ -89,6 +90,9 @@
 </script>
 <script src="js/jquery-1.11.3.js"></script>
 <script>
+  $("#x").click(function(){
+    $(this).parent().parent().parent().hide();
+  })
   // 修改密码成功后跳转index1.html
     function changePwd(){
         $.ajax({

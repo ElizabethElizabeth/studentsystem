@@ -13,36 +13,60 @@
 </style>
 <body>
   <h3>个人所在宿舍班级信息查询</h3>
-  <form action="/user/dormclass" method="get">
-    姓名：<input type="text" name="name">
-    准考证号：<input type="text" name="examNum">
-    <button>查询</button>
+  <form>
+    准考证号：<input type="text" id="examNum" name="examNum">
+    <button type="button">查询</button>
   </form>
   <table>
     <tr>
       <td>姓名</td>
-      <td></td>
+      <td id="sname"></td>
     </tr>
     <tr>
       <td>性别</td>
-      <td></td>
+      <td id="sex"></td>
     </tr>
     <tr>
       <td>系别</td>
-      <td></td>
+      <td id="department"></td>
     </tr>
     <tr>
       <td>班级</td>
-      <td></td>
+      <td id="className"></td>
     </tr>
     <tr>
       <td>宿舍楼</td>
-      <td></td>
+      <td id="building"></td>
     </tr>
     <tr>
       <td>门牌号</td>
-      <td></td>
+      <td id="houseNumber"></td>
     </tr>
   </table>
+  <script src="js/jquery-1.11.3.js"></script>
+  <script>
+    $("button").click(function(){
+      if(examNum.value.trim()!==""){
+        $.ajax({
+          url:"/dormclass",
+          type:"get",
+          data:{
+            examNum:examNum.value
+          },
+          dataType:"json",
+          success:function(dormclass){
+            sname.innerHTML=dormclass.sname;
+            sex.innerHTML=dormclass.gender==1?"男":"女";
+            department.innerHTML=dormclass.department;
+            className.innerHTML=dormclass.class;
+            building.innerHTML=dormclass.buildings;
+            houseNumber.innerHTML=dormclass.houseNumber;
+          }
+        })
+      }else{
+        alert("请填写准考证号...");
+      }
+    })
+  </script>
 </body>
 </html>
