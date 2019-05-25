@@ -32,52 +32,93 @@
   <table>
     <tr>
       <td>真实姓名</td>
-      <td></td>
+      <td id="sname"></td>
     </tr>
     <tr>
       <td>手机</td>
-      <td></td>
+      <td id="mobile"></td>
     </tr>
     <tr>
       <td>年龄</td>
-      <td></td>
+      <td id="age"></td>
     </tr>
     <tr>
       <td>电话</td>
-      <td></td>
+      <td id="telephone"></td>
     </tr>
     <tr>
       <td>身份证号</td>
-      <td></td>
+      <td id="idNum"></td>
     </tr>
     <tr>
       <td>性别</td>
-      <td></td>
+      <td id="gender"></td>
     </tr>
     <tr>
       <td>准考证号</td>
-      <td></td>
+      <td id="examNum"></td>
     </tr>
     <tr>
       <td>家庭地址</td>
-      <td></td>
+      <td id="addressH"></td>
     </tr>
     <tr>
       <td>录取编号</td>
-      <td></td>
+      <td id="admitNum"></td>
     </tr>
     <tr>
       <td>收录取通知书地址</td>
-      <td></td>
+      <td id="addressR"></td>
     </tr>
     <tr>
       <td>毕业学校</td>
-      <td></td>
+      <td id="school"></td>
     </tr>
     <tr>
       <td>是否已确认录取</td>
-      <td></td>
+      <td id="confirm"></td>
     </tr>
   </table>
+  <script src="js/jquery-1.11.3.js"></script>
+  <script>
+    $.ajax({
+      url:"/user/islogin",
+      type:"get",
+      dataType:"json",
+      success:function(result){
+        if(result.code==0){
+          alert(result.msg);
+        }else{
+          $.ajax({
+            url:"/user/",
+            type:"get",
+            dataType:"json",
+            success:function(result){
+              if(result.code==0){
+                alert(result.msg);
+              }else{
+                console.log(result);
+                $("#addressH").html(result.addressH);
+                $("#addressR").html(result.addressR);
+                $("#admitNum").html(result.admitNum);
+                $("#age").html(result.age);
+                $("#confirm").html(result.confirm);
+                $("#email").html(result.email);
+                $("#examNum").html(result.examNum);
+                $("#gender").html(result.gender==1?"男":"女");
+                $("#id").html(result.id);
+                $("#idNum").html(result.idNum);
+                $("#mobile").html(result.mobile);
+                $("#pwd").html(result.pwd);
+                $("#school").html(result.school);
+                $("#sname").html(result.sname);
+                $("#telephone").html(result.telephone);
+              }
+            }
+          })
+        }
+      }
+    })
+  </script>
 </body>
 </html>

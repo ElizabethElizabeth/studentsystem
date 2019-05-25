@@ -16,7 +16,7 @@
       <span>欢迎来到大学新生预录取系统</span>
       <a href="javascript:;">收藏本站</a>
       <a href="javascript:;">设为首页</a>  
-      你好，student1.
+      你好，<span id="uname"></span>.
       <button onclick="showPwdcard()">修改密码</button>
       <a href="index.html">退出</a>
     </h5>
@@ -64,9 +64,9 @@
     var scrollTop=document.body.scrollTop||document.documentElement.scrollTop 
     console.log(scrollTop);
     if(scrollTop>=300)
-    toTop.style.display="block";
+      toTop.style.display="block";
     else
-    toTop.style.display="none";
+      toTop.style.display="none";
   }
   
 </script>
@@ -90,6 +90,19 @@
 </script>
 <script src="js/jquery-1.11.3.js"></script>
 <script>
+  $.ajax({
+    url:"/user/islogin",
+    type:"get",
+    dataType:"json",
+    success:function(result){
+      if(result.code==0){
+        alert(result.msg);
+      }else{
+        $("#uname").html(result.uname);
+      }
+      
+    }
+  })
   $("#x").click(function(){
     $(this).parent().parent().parent().hide();
   })

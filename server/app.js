@@ -6,15 +6,16 @@ const moneyRouter=require('./routes/money.js');
 const dormclass=require("./routes/dormclass.js");
 var server=express();
 server.listen(3000);
-server.use(session({
-  secret: '随机字符串',
-  resave: false,
-  saveUninitialized: true
-}))
+
 server.use(express.static("public"));
 server.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
+server.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: false
+}))
 server.use('/user',userRouter);
 server.use('/money',moneyRouter);
 server.use('/dormclass',dormclass);

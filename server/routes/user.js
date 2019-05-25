@@ -71,7 +71,10 @@ router.get('/login',(req,res)=>{
         if(err) throw err;
         // console.log(result);
         if(result.length>0){
-            res.send({code:200,msg:'login suc'});   
+            req.session.uid=result[0]["id"]; 
+            req.session.role="student"; 
+            res.send({code:200,msg:'login suc'}); 
+            console.log(req.session);
         }else{
             res.send({code:0, msg:'登录失败,准考证号或密码错误'});
         }
@@ -93,7 +96,9 @@ router.get('/managelogin',(req,res)=>{
     pool.query(sql,[adminName,pwd],(err,result)=>{
         if(err) throw err;
         if(result.length>0){
-            res.send({code:200,msg:'login suc'});
+            req.session.uid=result[0]["id"];
+            req.session.role="admin";
+            res.send({code:200,msg:'login suc'})
         }else{
             res.send({code:0,msg:'登录失败,用户名或密码错误'});
         }
@@ -149,6 +154,40 @@ router.get("/changepwd",(req,res)=>{
     }else{
         res.send({code:0, msg:"必须填写正确的原密码和新密码！"});
     }
-    
+})
+//判断是否登录
+router.get("/islogin",(req,res)=>{
+    var uid=req.session.uid;
+    console.log(req.session);
+    if(uid){
+        var role=req.session.role;
+        if(role=="student")
+            var sql="select * from student where id=?";
+        else
+            var sql="select * from admin where id=?"
+        pool.query(sql,[uid],(err,result)=>{
+            if(err) console.log(err);
+            res.send({code:1, uname: result[0]["sname"]||result[0]["adminName"]});
+        })
+    }else{
+        res.send({code:0, msg:"未登录"});
+    }
+})
+//获得用户信息
+router.get("/",(req,res)=>{
+    var uid=req.session.uid;
+    var role=req.session.role;
+    if(uid){
+        if(role=="student")
+            var sql="select * from student where id=?";
+        else
+            var sql="select * from admin where id=?";
+        pool.query(sql,[uid],(err,result)=>{
+            if(err) console.log(err);
+            res.send(result[0]);
+        })
+    }else{
+        res.send({code:0, msg:"请先登录！"})
+    }
 })
 module.exports=router;
