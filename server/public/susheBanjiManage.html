@@ -30,6 +30,7 @@
 <body>
   <h3>个人所在宿舍班级信息查询</h3>
   <form>
+    姓名：<input type="text" id="sname" name="sname">
     准考证号：<input type="text" id="examNum" name="examNum">
     <button type="button">查询</button>
   </form>
@@ -62,12 +63,13 @@
   <script src="js/jquery-1.11.3.js"></script>
   <script>
     $("button").click(function(){
-      if(examNum.value.trim()!==""){
+      if(examNum.value.trim()!==""&sname.value.trim()!==""){
         $.ajax({
           url:"/dormclass",
           type:"get",
           data:{
-            examNum:examNum.value
+            examNum:examNum.value,
+            sname:sname.value
           },
           dataType:"json",
           success:function(dormclass){

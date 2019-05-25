@@ -25,24 +25,28 @@
     <!-- 修改密码 -->
     <div class="pwdcard">
         <form>
-          <p style="text-align:right"><img id="x" style="width:22px; height:23px" src="img/x.png"></p>
+          <p style="text-align:right"><img class="x" style="width:22px; height:23px" src="img/x.png"></p>
           准考证号:<input type="text" name="examNum"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;原密码:<input type="password" name="oldpwd"><br>
           &nbsp;&nbsp;&nbsp;&nbsp;新密码:<input type="password" name="newpwd"><br>
-          <button type="button" onclick="changePwd()">提交</button>
+          <p>
+          <button type="button" onclick="changePwd()">提交</button>  
+          <!-- <span class="x">取消</span>    -->
+          <input style="margin-left: 205px" type="button" value="取消" class="x">
+        </p>   
         </form>
     </div>
     
    
     <div class="daohang">
       <ul class="flex">
-        <li><a href="index2.html" target="targetText">首页</a></li>
-        <li><a href="yuluquQueren.html" target="targetText">新生预录取确认</a></li>
-        <li><a href="susheBanjiManage.html" target="targetText">个人所在宿舍、班级信息</a></li>
+        <li><a href="index2.html" target="targetText">首页</a></li>       
         <li><a href="infoSelect.html" target="targetText">新生个人信息</a></li>
+        <li><a href="susheBanjiManage.html" target="targetText">个人所在宿舍、班级信息</a></li>
         <li><a href="MoneyInfo.html" target="targetText">学费信息查询</a></li>
         <li><a href="reportPath.html" target="targetText">报到流程</a></li>
         <li><a href="community.html" target="targetText">新生讨论社区</a>  </li>
+        <li><a href="yuluquQueren.html" target="targetText">新生预录取确认</a></li>
         </ul>
     </div>
     <div id="toTop">
@@ -103,7 +107,7 @@
       
     }
   })
-  $("#x").click(function(){
+  $(".x").click(function(){
     $(this).parent().parent().parent().hide();
   })
   // 修改密码成功后跳转index1.html

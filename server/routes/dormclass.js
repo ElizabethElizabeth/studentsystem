@@ -5,10 +5,11 @@ const pool=require('../pool.js');
 var router=express.Router();
 
 router.get("/",(req,res)=>{
+  var sname=req.query.sname;
   var examNum=req.query.examNum;
   if(examNum){
-    var sql="select * from dormclass where examNum=?";
-    pool.query(sql,[examNum],(err,result)=>{
+    var sql="select * from dormclass where sname=? AND examNum=? ";
+    pool.query(sql,[sname,examNum],(err,result)=>{
       if(err) console.log(err);
       res.send(result[0]);
     })
