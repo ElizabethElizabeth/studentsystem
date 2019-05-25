@@ -34,8 +34,8 @@ CREATE TABLE student(
    gender VARCHAR(100),
    addressH VARCHAR(100),
    addressR VARCHAR(100),
-   studentConfirm VARCHAR(100)，
-   parentConfirm VARCHAR(100)，
+   studentConfirm VARCHAR(100),
+   parentConfirm VARCHAR(100),
    confirm VARCHAR(100)
 ); 
 INSERT INTO student VALUES(1,"student1",18,610481199706141820,41102534265,0125,"陕西省兴平市西郊高级中学",18089112326,18089112326,"1176726987@qq.com",123456,1,"陕西省兴平市马嵬镇南留村","陕西省兴平市西郊高级中学","学生未确认","家长未确认","未确认录取");

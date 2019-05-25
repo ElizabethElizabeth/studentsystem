@@ -13,19 +13,123 @@
   </style>
 <body>
   <h3>新生确认</h3>
-  <form action="">
-    姓名：<input type="text">
-    身份证号：<input type="text">
-    准考证号：<input type="text">
-    密码：<input type="password">
+  <form>
+    姓名：<input id="sname" type="text">
+    身份证号：<input id="idNum" type="text">
+    准考证号：<input id="examNum" type="text">
+    密码：<input id="pwd" type="password">
     <p>确定要进行预录取确认吗？（确认后不可更改）</p>
-    <button>确认</button>
+    <button type="button" id="btnStudent" disabled>确认</button>
   </form>
 
   <h3>家长确认</h3>
-  <form action="">
+  <form>
     <p>家长确认是第二层确认，家长确认后将发纸质录取通知书。（确认后不可更改）</p>
-    <button>确认</button>
+    <button type="button" id="btnParent" disabled>确认</button>
   </form>
+  <script src="js/jquery-1.11.3.js"></script>
+  <script>
+    var $txtSname=$("#sname");
+    var $txtIdNum=$("#idNum");
+    var $txtExamNum=$("#examNum");
+    var $txtPwd=$("#pwd");
+    var $btnStudent=$("#btnStudent");
+    var $btnParent=$("#btnParent");
+    $("input:text,input:password")
+    .focus(function(){
+      $btnStudent.prop("disabled",true)
+                  .html("确认")
+                  .css("background-color","")
+      $btnParent.prop("disabled",true)
+                  .html("确认")
+                  .css("background-color","")
+      if($txtSname.val().trim()!==""&&$txtIdNum.val().trim()!==""&&$txtExamNum.val().trim()!==""&&$txtPwd.val().trim()){
+        myConfirm();
+      }
+    })
+    .blur(function(){
+      if($txtSname.val().trim()!==""&&$txtIdNum.val().trim()!==""&&$txtExamNum.val().trim()!==""&&$txtPwd.val().trim()){
+        myConfirm();
+      }
+    })
+    function myConfirm(){
+      $.ajax({
+        url:"/user/confirm",
+        type:"get",
+        data:{
+          sname:$txtSname.val(),
+          idNum:$txtIdNum.val(),
+          examNum:$txtExamNum.val(),
+          pwd:$txtPwd.val()
+        },
+        dataType:"json",
+        success:function(result){
+          if(result.code==0){
+            alert(result.msg);
+          }else{
+            if(result.studentConfirm=="学生未确认"){
+              $btnStudent.prop("disabled",false)
+                        .html("确认")
+                        .css("background-color","")
+              $btnParent.prop("disabled",true)
+                        .html("确认")
+                        .css("background-color","")
+            }else if(result.studentConfirm=="学生已确认"&&result.parentConfirm=="家长未确认"){
+              $btnStudent.prop("disabled",true)
+                        .html("学生已确认")
+                        .css("background-color","lightGreen")
+              $btnParent.prop("disabled",false)
+                        .html("确认")
+                        .css("background-color","")
+            }else{
+              $btnStudent.prop("disabled",true)
+                        .html("学生已确认")
+                        .css("background-color","lightGreen")
+              $btnParent.prop("disabled",true)
+                        .html("家长已确认")
+                        .css("background-color","lightGreen")
+            }
+          }
+        }
+      })
+    }
+    function change(){
+      var $self=$(this);
+      $.ajax({
+        url:"/user/changeConfirm",
+        type:"get",
+        data:{
+          sname:$txtSname.val(),
+          idNum:$txtIdNum.val(),
+          examNum:$txtExamNum.val(),
+          pwd:$txtPwd.val()
+        },
+        dataType:"json",
+        success:function(result){
+          if(result.code==0){
+            alert(result.msg);
+          }else{
+            if($self.is("#btnStudent")){
+              $btnStudent.prop("disabled",true)
+                        .html("学生已确认")
+                        .css("background-color","lightGreen")
+              $btnParent.prop("disabled",false)
+                        .html("确认")
+                        .css("background-color","")
+            }else{
+              $btnStudent.prop("disabled",true)
+                        .html("学生已确认")
+                        .css("background-color","lightGreen")
+              $btnParent.prop("disabled",true)
+                        .html("家长已确认")
+                        .css("background-color","lightGreen")
+            }
+          }
+        }
+      })
+    }
+    $btnStudent.click(change);
+    $btnParent.click(change);
+  </script>
 </body>
 </html>

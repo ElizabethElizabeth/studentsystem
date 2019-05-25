@@ -190,4 +190,54 @@ router.get("/",(req,res)=>{
         res.send({code:0, msg:"请先登录！"})
     }
 })
+//获取学生确认状态
+router.get("/confirm",(req,res)=>{
+    var sname=req.query.sname;
+    var idNum=req.query.idNum;
+    var examNum=req.query.examNum;
+    var pwd=req.query.pwd;
+    if(sname&&idNum&&examNum&&pwd){
+        var sql="select * from student where sname=? and idNum=? and examNum=? and pwd=?";
+        pool.query(sql,[sname,idNum,examNum,pwd],(err,result)=>{
+            if(err) console.log(err);
+            if(result.length==0){
+                res.send({code:0, msg:"查无此人！"})
+            }else{
+                res.send(result[0]);
+            }
+        })
+    }else{
+        res.send({code:0, msg:"必须同时提供学生姓名，身份证号，准考证号和密码！"})
+    }
+})
+//学生确认
+router.get("/changeConfirm",(req,res)=>{
+    var sname=req.query.sname;
+    var idNum=req.query.idNum;
+    var examNum=req.query.examNum;
+    var pwd=req.query.pwd;
+    if(sname&&idNum&&examNum&&pwd){
+        var sql="select * from student where sname=? and idNum=? and examNum=? and pwd=? ";
+        pool.query(sql,[sname,idNum,examNum,pwd],(err,result)=>{
+            if(err) console.log(err);
+            if(result.length==0){
+                res.send({code:0, msg:"查无此人！"})
+            }else{
+                var uid=result[0]["id"];
+                if(result[0]["studentConfirm"]=="学生未确认"){
+                    var sql="update student set studentConfirm='学生已确认' where id=?";
+                }else{
+                    var sql="update student set parentConfirm='家长已确认' where id=?";
+                }
+                pool.query(sql,[uid],(err,result)=>{
+                    if(err) console.log(err);
+                    res.send({code:1);
+                })
+            }
+        })
+    }else{
+        res.send({code:0, msg:"必须同时提供学生姓名，身份证号，准考证号和密码！"})
+    }
+})
+//家长确认
 module.exports=router;
