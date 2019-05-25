@@ -63,7 +63,7 @@
   <script src="js/jquery-1.11.3.js"></script>
   <script>
     $("button").click(function(){
-      if(examNum.value.trim()!==""&sname.value.trim()!==""){
+      if(sname.value.trim()!==""&examNum.value.trim()!==""){
         $.ajax({
           url:"/dormclass",
           type:"get",
@@ -73,7 +73,7 @@
           },
           dataType:"json",
           success:function(dormclass){
-            sname.innerHTML=dormclass.sname;
+            // sname.innerHTML=dormclass.sname;
             sex.innerHTML=dormclass.gender==1?"男":"女";
             department.innerHTML=dormclass.department;
             className.innerHTML=dormclass.class;
