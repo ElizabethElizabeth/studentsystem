@@ -227,7 +227,7 @@ router.get("/changeConfirm",(req,res)=>{
                 if(result[0]["studentConfirm"]=="学生未确认"){
                     var sql="update student set studentConfirm='学生已确认' where id=?";
                 }else{
-                    var sql="update student set parentConfirm='家长已确认' where id=?";
+                    var sql="update student set parentConfirm='家长已确认', confirm='已确认录取' where id=?";
                 }
                 pool.query(sql,[uid],(err,result)=>{
                     if(err) console.log(err);
@@ -239,5 +239,4 @@ router.get("/changeConfirm",(req,res)=>{
         res.send({code:0, msg:"必须同时提供学生姓名，身份证号，准考证号和密码！"})
     }
 })
-//家长确认
 module.exports=router;
