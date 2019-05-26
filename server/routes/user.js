@@ -231,7 +231,7 @@ router.get("/changeConfirm",(req,res)=>{
                 }
                 pool.query(sql,[uid],(err,result)=>{
                     if(err) console.log(err);
-                    res.send({code:1);
+                    res.send({code:1});
                 })
             }
         })
