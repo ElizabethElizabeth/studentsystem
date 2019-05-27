@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>信息录入</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+	.formGroup{
+		display:flex;
+	}
+	.form-group{
+		width: 30%;
+	}
+	
+</style>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/vue.js"></script>
+<script>
+	  window.onload = function(){
+		  new Vue({
+			  el:'#box',
+			  data:{
+				 myData:[],
+				 username:"",
+				 age:"",
+				 number:"",
+				 email:"",
+				 school:"",
+				 nowIndex:-100
+			  },
+			  methods:{
+				 add:function(){
+					  this.myData.push({
+						  username:this.username,
+						  age:this.age,
+						  number:this.number,
+						  email:this.email,
+						  school:this.school
+					  })
+					 this.username="",
+					 this.age="",
+					 this.number="",
+					 this.email="",
+					 this.school=""
+				 },
+				  del:function(n){
+					  if(n ==-2){
+						  this.myData="";
+					  }{
+						  this.myData.splice(n,1);
+					  }
+				  }
+			  }
+		  })
+	  }
+</script>
+
+</head>
+<body>
+
+   <h3>查看已确认录取的新生</h3>
+	 <hr/>
+	 <table class="table table-bordered table-hover">
+		 <caption class="h3 text-info">新生信息录入表</caption>
+		 <tr>
+			 <th class="text-center">序号</th>
+			 <th class="text-center">姓名</th>
+			 <th class="text-center">年龄</th>
+			 <th class="text-center">身份证号</th>
+			 <th class="text-center">准考证号</th>
+			 <th class="text-center">录取编号</th>
+			 <th class="text-center">毕业学校</th>
+			 <th class="text-center">电话</th>
+			 <th class="text-center">手机</th>
+			 <th class="text-center">邮箱</th>
+			 <th class="text-center">密码</th>
+			 <th class="text-center">性别</th>
+			 <th class="text-center">家庭地址</th>
+			 <th class="text-center">收货地址</th>
+			 <th class="text-center">新生是否已确认录取</th>
+			 <th class="text-center">家长是否已确认录取</th>
+			 <th class="text-center">是否已确认录取</th>
+			 <th class="text-center">操作</th>
+		 </tr>
+		 <tr class="text-center" v-for="item in myData">
+			 <td>{{$index+1}}</td>
+			 <td>{{item.sname}}</td>
+			 <td>{{item.age}}</td>
+			 <td>{{item.idNum}}</td>
+			 <td>{{item.examNum}}</td>
+			 <td>{{item.admitNum}}</td>
+			 <td>{{item.school}}</td>
+			 <td>{{item.telephone}}</td>
+			 <td>{{item.mobile}}</td>
+			 <td>{{item.email}}</td>
+			 <td>{{item.pwd}}</td>
+			 <td>{{item.pwd}}</td>
+			 <td>{{item.gender}}</td>
+			 <td>{{item.addressH}}</td>
+			 <td>{{item.addressR}}</td>
+			 <td>{{item.studentConfirm}}</td>
+			 <td>{{item.parentConfirm}}</td>
+			 <td>{{item.confirm}}</td>
+			 <td>
+				 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
+			 </td>
+		 </tr>
+		 <tr v-show="myData.length!=0">
+			 <td colspan="7" class="text-right">
+				 <button class="btn btn-danger"  data-toggle="modal" data-target="#layer" v-on:click="nowIndex=-2">删除全部</button>
+			 </td>
+		 </tr>
+		 <tr v-show="myData.length==0">
+			 <td colspan="7" class="text-center text-info">
+				 <p>暂无数据...</p>
+			 </td>
+		 </tr>
+	 </table>
+	 <!--模态框 弹出框-->
+	 <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
+		  <div class="modal-dialog">
+			  <div class="modal-content">
+				  <div class="modal-header">
+					  <button class="close" data-dismiss="modal">
+						  <span>是否删除信息</span>
+					  </button>
+					  <h4 class="modal-title">确认删除吗？</h4>
+				  </div>
+				  <div class="modal-body text-right">
+					  <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+					  <button class="btn btn-danger btn-sm" data-dismiss="modal" v-on:click="del(nowIndex)">确认</button>
+				  </div>
+			  </div>
+		  </div>
+	 </div>
+
+ 
+</body>
+</html>

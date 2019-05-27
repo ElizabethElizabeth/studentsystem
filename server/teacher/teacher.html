@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="">
+  <style>
+    *{
+      margin: 0;padding: 0;
+    }
+    .flex{
+      display: flex;
+    }
+    .daohang ul{
+      list-style: none;
+    }
+    .daohang{
+      width: 15%;  
+    }
+    .frame{
+      width: 85%;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex">
+    <div class="daohang">
+      <h2>大学新生预录取系统教师端</h2>
+      <ul>
+        <li><a href="infoinput.html" target="targetText">新生信息录入</a></li>       
+        <li><a href="changepwd.html" target="targetText">修改教师登录密码</a></li>
+        <li><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>
+        <li><a href="infocheck.html" target="targetText">查看所有新生详细信息</a></li>
+      </ul>
+    </div>
+    <div class="frame" style="border:0;" >
+      <iframe src="infoinput.html"    name="targetText" height=1000px; width=100%  frameborder="0"  scrolling="no" >
+      </iframe>
+    </div>
+</div>
+</body>
+</html>
