@@ -22,14 +22,37 @@
   <!-- 修改密码 -->
   <div class="pwdcard">
       <form>
-        用户名:<input type="text" name="adminName"><br>
         原密码:<input type="password" name="oldpwd"><br>
         新密码:<input type="password" name="newpwd"><br>
-        <button class="btn-success" onclick="changePwd()">提交</button>   
+        <button type="button" class="btn-success" onclick="changePwd()">提交</button>   
       </form>
   </div>
+  <script src="../js/jquery-1.11.3.js"></script>
   <script>
-    
+    var $txtOldPwd=$("input[name=oldpwd]");
+    var $txtNewPwd=$("input[name=newpwd]");
+    function changePwd(){
+      if($txtOldPwd.val().trim()!==""&&$txtNewPwd.val().trim()!==""){
+        $.ajax({
+          url:"/user/teacherchangepwd",
+          type:"get",
+          data:{
+              oldpwd:$txtOldPwd.val().trim(),
+              newpwd:$txtNewPwd.val().trim()
+          },
+          dataType:"json",
+          success:function(res){
+              if(res.code==0){
+                  alert(res.msg);
+              }else{
+                  alert("修改密码成功！");
+                  $txtOldPwd.val("");
+                  $txtNewPwd.val("");
+              }
+          }
+        })
+      }
+    }
   </script>
 </body>
 </html>

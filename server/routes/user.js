@@ -80,43 +80,43 @@ router.get('/login',(req,res)=>{
         }
     })
 })
-// 2.管理员登录:
-router.get('/managelogin',(req,res)=>{
-    var adminName=req.body.adminName;
-    var pwd=req.body.pwd;
-    if(!adminName){
-        res.send({code:0, msg: 'adminName require'});
+// 2.老师登录:
+router.get('/teacherlogin',(req,res)=>{
+    var teacherName=req.query.teacherName;
+    var pwd=req.query.pwd;
+    if(!teacherName){
+        res.send({code:0, msg: 'teacherName require'});
         return;
     }
     if(!pwd){
         res.send({code:0, msg: 'pwd require'});
         return;
     }
-    var sql='SELECT id FROM admin WHERE adminName=? AND pwd=?';
-    pool.query(sql,[adminName,pwd],(err,result)=>{
+    var sql='SELECT * FROM teacher WHERE teacherName=? AND pwd=?';
+    pool.query(sql,[teacherName,pwd],(err,result)=>{
         if(err) throw err;
         if(result.length>0){
             req.session.uid=result[0]["id"];
-            req.session.role="admin";
-            res.send({code:200,msg:'login suc'})
+            req.session.role="teacher";
+            res.send({code:200,msg:'login suc',uname:result[0]["teacherName"]})
         }else{
             res.send({code:0,msg:'登录失败,用户名或密码错误'});
         }
     })
 })
-// 3. 管理员修改密码: 
-router.get("/managechangepwd",(req,res)=>{
-    var uid=req.query.uid;
+// 3. 老师修改密码: 
+router.get("/teacherchangepwd",(req,res)=>{
+    var uid=req.session.uid;
     var oldpwd=req.query.oldpwd;
     var newpwd=req.query.newpwd;
     if(uid&&oldpwd&&newpwd){
-        var sql="select * from admin where id=? and pwd=?"
+        var sql="select * from teacher where id=? and pwd=?"
         pool.query(sql,[uid,oldpwd],(err,result)=>{
             if(err){ console.log(err); }
             else if(result.length==0){
                 res.send({code:0, msg:"修改失败！原密码不正确！"})
             }else{
-                var sql="update admin set pwd=? where id=?";
+                var sql="update teacher set pwd=? where id=?";
                 pool.query(sql,[newpwd,uid],(err,result)=>{
                     if(err){console.log(err);}
                     else{
@@ -128,7 +128,6 @@ router.get("/managechangepwd",(req,res)=>{
     }else{
         res.send({code:0, msg:"必须填写原密码和新密码！"});
     }
-    
 })
 // 4. 学生修改密码: 
 router.get("/changepwd",(req,res)=>{
@@ -181,7 +180,7 @@ router.get("/",(req,res)=>{
         if(role=="student")
             var sql="select * from student where id=?";
         else
-            var sql="select * from admin where id=?";
+            var sql="select * from teacher where id=?";
         pool.query(sql,[uid],(err,result)=>{
             if(err) console.log(err);
             res.send(result[0]);

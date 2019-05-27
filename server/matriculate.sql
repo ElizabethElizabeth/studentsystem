@@ -14,6 +14,18 @@ INSERT INTO admin VALUES(3,"admin3",123456);
 INSERT INTO admin VALUES(4,"admin4",123456);
 INSERT INTO admin VALUES(5,"admin5",123456);
 
+-- 老师信息表
+CREATE TABLE teacher(
+	 id INT PRIMARY KEY AUTO_INCREMENT,
+	 teacherName VARCHAR(100),
+	 pwd VARCHAR(50)	
+); 
+INSERT INTO teacher VALUES(1,"teacher1",123456);
+INSERT INTO teacher VALUES(2,"teacher2",123456);
+INSERT INTO teacher VALUES(3,"teacher3",123456);
+INSERT INTO teacher VALUES(4,"teacher4",123456);
+INSERT INTO teacher VALUES(5,"teacher5",123456);
+
 
 
 
