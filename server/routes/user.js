@@ -25,35 +25,27 @@ var router=express.Router();
 //       }
 //     });
 //   });
-//   //2.用户注册
-//   router.post('/reg',(req,res)=>{
-//     var obj=req.body;
-//     //验证数据是否为空
-//     if(!obj.uname){
-//       res.send({code:401,msg:'uname required'});
-//       return;
-//     }
-//     if(!obj.upwd){
-//       res.send({code:402,msg:'upwd required'});
-//       return;
-//     }
-//     if(!obj.gender){
-//       res.send({code:403,msg:'gender required'});
-//       return;
-//     }
-//     if(!obj.position){
-//       res.send({code:404,msg:'position required'});
-//       return;
-//     }
-//     //执行SQL语句，将对象插入到xz_user中，如果插入成功，响应状态码200，消息 reg suc
-//     pool.query('INSERT INTO person SET ?',[obj],(err,result)=>{
-//       if(err) throw err;
-//       //console.log(result);
-//       if(result.affectedRows>0){
-//         res.send({code:200,msg:'reg suc'});
-//       }
-//     });
-//   });
+//2.用户注册
+router.get('/reg',(req,res)=>{
+    var {sname,age,idNum,examNum,pwd,school,telephone,mobile,email,gender,addressH,addressR,studentConfirm,parentConfirm}=req.query;
+    console.log(sname,age,idNum,examNum,pwd,school,telephone,mobile,email,gender,addressH,addressR,studentConfirm,parentConfirm);
+    //验证数据是否为空
+    if(sname&&age&&idNum&&examNum&&pwd&&school&&telephone&&mobile&&email&&gender!==undefined&&addressH&&addressR&&studentConfirm!==undefined&&parentConfirm!==undefined){
+        //执行SQL语句，将对象插入到xz_user中，如果插入成功，响应状态码200，消息 reg suc
+        pool.query(
+            'INSERT INTO student values(null,?,?,?,?,null,?,?,?,?,?,?,?,?,?,?,?)',
+            [sname,age,idNum,examNum,school,telephone,mobile,email,pwd,gender,addressH,addressR,studentConfirm,parentConfirm,studentConfirm=="学生已确认"&&parentConfirm=="家长以确认"?1:0],(err,result)=>{
+            if(err) throw err;
+            console.log(result);
+            if(result.affectedRows>0){
+                res.send({code:200,msg:'reg suc'});
+            }
+        });
+    }else{
+        res.send({code:0,msg:'添加失败！资料不全！'});
+    }
+    
+});
 // 1.学生登录:
 router.get('/login',(req,res)=>{
     var examNum=req.query.examNum;

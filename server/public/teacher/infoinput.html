@@ -3,15 +3,14 @@
 <head lang="en">
 <meta charset="UTF-8">
 <title>信息录入</title>
-<script src="js/jquery-1.7.2.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/vue.js"></script>
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <style>
 		.flex{
 			display:flex;	
 		}
-		#box input{
+		#box input[type=text],#box input[type=password]{
 			width: 20%;
 			margin-right: 30px;
 		}
@@ -24,56 +23,52 @@
 <h3 class="text-info">新生信息录入</h3>
 <hr>
 <div class="container" id="box">
-	 <form role="form">
+	 <form id="form1" role="form">
 		<div class="form-group flex">
-			 <label for="username">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：</label>
-			 <input type="text" id="username" class="form-control" v-model="username" placeholder="输入用户名">
+			 <label for="username">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学生姓名：</label>
+			 <input type="text" id="sname" class="form-control" v-model="sname" placeholder="输入学生名">
 			 <label for="age">年龄：</label>
 			 <input type="text" id="age" class="form-control"  v-model="age" placeholder="输入年龄">
 			 <label for="number">身份证号：</label>
-			 <input type="text" id="number" class="form-control"  v-model="number" placeholder="输入身份证号">
+			 <input type="text" id="idNum" class="form-control"  v-model="idNum" placeholder="输入身份证号">
 		</div>
 		 
 		<div class="form-group flex">
-			<label for="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;准考证号：</label>
-			<input type="text" id="email" class="form-control"  v-model="email" placeholder="输入准考证号">
+			<label for="examNum">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;准考证号：</label>
+			<input type="text" id="examNum" class="form-control"  v-model="examNum" placeholder="输入准考证号">
 			
-			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入密码">
+			<label for="pwd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
+			<input type="password" id="pwd" class="form-control"  v-model="pwd" placeholder="输入密码">
 	
 			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;毕业学校：</label>
 			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入毕业学校">
 		</div>
 		<div class="form-group flex">
-			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入电话">
+			<label for="telephone">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话：</label>
+			<input type="text" id="telephone" class="form-control"  v-model="telephone" placeholder="输入电话">
 	
-			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;手机：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入手机号">
+			<label for="mobile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;手机：</label>
+			<input type="text" id="mobile" class="form-control"  v-model="mobile" placeholder="输入手机号">
 	
-			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮箱：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入邮箱">
+			<label for="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮箱：</label>
+			<input type="text" id="email" class="form-control"  v-model="email" placeholder="输入邮箱">
 		</div>
-		<div class="form-group flex">
+		<div class="form-group">
 			
-			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入性别">
-	
-			<label for="school">&nbsp;&nbsp;家庭地址：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入家庭地址">			
-
-			<label for="school">新生是否已确认录取：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="新生是否已确认录取">			
+			<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：</label>
+			<label for="male"></label><input type="radio" id="male" name="gender" v-model="gender" value="1" checked>男 <label for="female"></label><input type="radio" id="female" name="gender" v-model="gender" value="0">女
+			<label for="addressH">&nbsp;&nbsp;家庭地址：</label>
+			<input type="text" id="addressH" v-model="addressH" placeholder="输入家庭地址">	
+		
+			<label for="addressR">&nbsp;&nbsp;接收通知地址：</label>
+			<input type="text" id="addressR" v-model="addressR" placeholder="输入接收通知地址">	
 		</div>
-		<div class="form-group flex">									
-							
-			<label for="school">家长是否已确认录取：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="家长是否已确认录取">						
-			<label for="school">是否已确认录取：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="是否已确认录取">					
+		<div class="form-group flex">	
+			<label><input type="checkbox" id="studentConfirm" name="studentConfirm" v-model="studentConfirm">新生是否已确认录取</label>&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input type="checkbox" id="parentConfirm" name="parentConfirm" v-model="parentConfirm">家长是否已确认录取</label>							
 		</div>
 		<div class="form-group flex">			
-			<input type="button"  value="添加" class="btn btn-primary" v-on:click="add()">
+			<input type="button"  value="添加" class="btn btn-primary" onclick="add()">
 			<input type="reset"  value="重置" class="btn btn-danger">
 		</div>
 	 </form>
@@ -96,6 +91,41 @@
 			  </div>
 		  </div>
 	 </div>
+
+	 <script>
+		 function add(){
+
+			 $.ajax({
+				 url:"/user/reg",
+				 type:"get",
+				 data:{
+					sname:$("#sname").val(),
+					age:$("#age").val(),
+					idNum:$("#idNum").val(),
+					examNum:$("#examNum").val(),
+					school:$("#school").val(),
+					telephone:$("#telephone").val(),
+					mobile:$("#mobile").val(),
+					email:$("#email").val(),
+					pwd:$("#pwd").val(),
+					gender:$("#male").is(":checked")?1:0,
+					addressH:$("#addressH").val(),
+					addressR:$("#addressR").val(),
+					studentConfirm:$("#studentConfirm").is("checked")?1:0,
+					parentConfirm:$("#parentConfirm").is("checked")?1:0
+				 },
+				 dataType:"json",
+				 success:function(result){
+					 if(result.code==0){
+							alert(result.msg);
+					 }else{
+							alert("添加成功");
+							form1.reset();
+					 }
+				 }
+			 })
+		 }
+	 </script>
 </div>
 </body>
 </html>

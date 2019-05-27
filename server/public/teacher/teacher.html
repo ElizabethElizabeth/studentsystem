@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="js/bootstrap.js"></script>
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/teacher.css">
+  <script src="../js/jquery-1.11.3.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
   <div class="flex">
@@ -19,7 +20,7 @@
         <li class="list-group-item-info"><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>    
       </ul>
       <div class="absolute1">
-        你好，<span id="teacherName"></span>.
+        你好，<span id="uname"></span>.
         <button class="btn-info button1" onclick="showPwdcard()">修改密码</button>
         <a href="javascript:;" id="btnLogout">退出</a>
       </div>
@@ -47,8 +48,21 @@
     pwdcard.style.display="block";
   }
 </script>
-<script src="js/jquery-1.11.3.js"></script>
+
 <script>
+  $.ajax({
+    url:"/user/islogin",
+    type:"get",
+    dataType:"json",
+    success:function(result){
+      if(result.code==0){
+        alert(result.msg);
+        location.replace("../index.html");
+      }else{
+        $("#uname").html(result.uname);
+      }
+    }
+  })
   $("#btnLogout").click(function(){
     $.ajax({
       url:"/user/logout",

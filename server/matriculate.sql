@@ -35,20 +35,20 @@ CREATE TABLE student(
    id INT PRIMARY KEY AUTO_INCREMENT,
    sname VARCHAR(100),
    age INT,
-   idNum VARCHAR(100),--身份证号
-   examNum VARCHAR(100),--准考证号
-   admitNum VARCHAR(100),--录取编号
-   school VARCHAR(100),--毕业学校
-   telephone VARCHAR(100),--电话
-   mobile VARCHAR(100),--手机
+   idNum VARCHAR(100),
+   examNum VARCHAR(100),
+   admitNum VARCHAR(100),
+   school VARCHAR(100),
+   telephone VARCHAR(100),
+   mobile VARCHAR(100),
    email VARCHAR(100),
    pwd VARCHAR(100),  
    gender VARCHAR(100),
-   addressH VARCHAR(100),--家庭地址
-   addressR VARCHAR(100),--收货地址
-   studentConfirm VARCHAR(100),--学生确认
-   parentConfirm VARCHAR(100),--家长确认
-   confirm VARCHAR(100)--最终确认
+   addressH VARCHAR(100),
+   addressR VARCHAR(100),
+   studentConfirm VARCHAR(100),
+   parentConfirm VARCHAR(100),
+   confirm VARCHAR(100)
 ); 
 INSERT INTO student VALUES(1,"student1",18,610481199706141820,41102534265,0125,"陕西省兴平市西郊高级中学",18089112326,18089112326,"1176726987@qq.com",123456,1,"陕西省兴平市马嵬镇南留村","陕西省兴平市西郊高级中学","学生未确认","家长未确认","未确认录取");
 INSERT INTO student VALUES(2,"student2",18,610481199706141821,41102534266,0126,"陕西省兴平市秦岭中学",18089112326,18089112326,"1176726987@qq.com",123456,1,"陕西省兴平市马嵬镇","陕西省兴平市秦岭中学","学生未确认","家长未确认","未确认录取");
