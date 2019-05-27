@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="">
+  <script src="js/bootstrap.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.css">
   <style>
     *{
       margin: 0;padding: 0;
@@ -15,31 +16,57 @@
     }
     .daohang ul{
       list-style: none;
+      margin-top: 60px;
     }
     .daohang{
-      width: 15%;  
+      width: 17%;   
+    }
+    .daohang h2{
+      margin-top: 44px;
     }
     .frame{
-      width: 85%;
-      margin-top: 30px;
+      width: 83%;
+    }
+    body{
+      background: #ccc;
+    }
+    .relateve{
+      position: relative;
+    }
+    .absolute1{
+      position: absolute;
+      top: 570px;left: 160px;
     }
   </style>
 </head>
 <body>
   <div class="flex">
-    <div class="daohang">
+    <div class="daohang relative">
       <h2>大学新生预录取系统教师端</h2>
       <ul>
         <li><a href="infoinput.html" target="targetText">新生信息录入</a></li>       
+        <li><a href="infocheck.html" target="targetText">新生信息录入表</a></li>
+        <li><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>     
         <li><a href="changepwd.html" target="targetText">修改教师登录密码</a></li>
-        <li><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>
-        <li><a href="infocheck.html" target="targetText">查看所有新生详细信息</a></li>
       </ul>
+      <a class="absolute1" href="javascript:;" id="btnLogout">退出</a>
     </div>
     <div class="frame" style="border:0;" >
       <iframe src="infoinput.html"    name="targetText" height=1000px; width=100%  frameborder="0"  scrolling="no" >
       </iframe>
     </div>
 </div>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+  $("#btnLogout").click(function(){
+    $.ajax({
+      url:"/user/logout",
+      type:"get",
+      success:function(){
+        location.replace("../index.html");
+      }
+    })
+  })
+</script>
 </body>
 </html>
