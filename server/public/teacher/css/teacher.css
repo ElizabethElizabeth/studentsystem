@@ -1,0 +1,53 @@
+*{
+  margin: 0;padding: 0;
+}
+.flex{
+  display: flex;
+}
+.daohang ul{
+  list-style: none;
+  margin-top: 60px;
+}
+.daohang{
+  width: 17%;   
+}
+.daohang h2{
+  margin-top: 44px;
+}
+.frame{
+  width: 83%;
+}
+body{
+  background: #ccc;
+}
+.relateve{
+  position: relative;
+}
+.absolute1{
+  position: absolute;
+  top: 550px;left: 20px;
+}
+.pwdcard{
+position:fixed;
+display:none;
+left:50%; top:50%;
+margin-left:0px;
+margin-top:0px;
+box-sizing: border-box;
+width:230px; height:130px;
+border: 1px solid #aac;
+background: #ddc;
+padding: 5px 10px;
+border-radius: 4px;
+box-shadow: 3px 4px #aac;
+}
+.pwdcard p{
+margin-top: 12px;
+}
+.pwdcard h4{
+margin-top: 6px;
+margin-bottom: 6px;
+}
+.daohang ul li{
+padding: 7px 0px 7px 20px;
+}

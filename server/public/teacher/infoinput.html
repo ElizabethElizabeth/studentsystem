@@ -3,66 +3,25 @@
 <head lang="en">
 <meta charset="UTF-8">
 <title>信息录入</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<style>
-	.flex{
-		display:flex;
-		
-	}
-	#box input{
-		width: 20%;
-		margin-right: 30px;
-	}
-	body{
-    background: #eee;
-  }
-</style>
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/vue.js"></script>
-<script>
-	  window.onload = function(){
-		  new Vue({
-			  el:'#box',
-			  data:{
-				 myData:[],
-				 username:"",
-				 age:"",
-				 number:"",
-				 email:"",
-				 school:"",
-				 nowIndex:-100
-			  },
-			  methods:{
-				 add:function(){
-					  this.myData.push({
-						  username:this.username,
-						  age:this.age,
-						  number:this.number,
-						  email:this.email,
-						  school:this.school
-					  })
-					 this.username="",
-					 this.age="",
-					 this.number="",
-					 this.email="",
-					 this.school=""
-				 },
-				  del:function(n){
-					  if(n ==-2){
-						  this.myData="";
-					  }{
-						  this.myData.splice(n,1);
-					  }
-				  }
-			  }
-		  })
-	  }
-</script>
-
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+		.flex{
+			display:flex;	
+		}
+		#box input{
+			width: 20%;
+			margin-right: 30px;
+		}
+		body{
+			background: #eee;
+		}
+	</style>
 </head>
 <body>
-<h3>新生信息录入</h3>
+<h3 class="text-info">新生信息录入</h3>
 <hr>
 <div class="container" id="box">
 	 <form role="form">
@@ -79,8 +38,8 @@
 			<label for="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;准考证号：</label>
 			<input type="text" id="email" class="form-control"  v-model="email" placeholder="输入准考证号">
 			
-			<label for="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录取编号：</label>
-			<input type="text" id="email" class="form-control"  v-model="email" placeholder="输入录取编号">
+			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
+			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入密码">
 	
 			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;毕业学校：</label>
 			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入毕业学校">
@@ -96,89 +55,30 @@
 			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入邮箱">
 		</div>
 		<div class="form-group flex">
-			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入密码">
-	
+			
 			<label for="school">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：</label>
 			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入性别">
 	
 			<label for="school">&nbsp;&nbsp;家庭地址：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入家庭地址">									
-		</div>
-		<div class="form-group flex">
-			<label for="school">&nbsp;&nbsp;收货地址：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入收货地址">									
-	
+			<input type="text" id="school" class="form-control"  v-model="school" placeholder="输入家庭地址">			
+
 			<label for="school">新生是否已确认录取：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="新生是否已确认录取">									
-		
-			<label for="school">家长是否已确认录取：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="家长是否已确认录取">									
+			<input type="text" id="school" class="form-control"  v-model="school" placeholder="新生是否已确认录取">			
 		</div>
-		<div class="form-group flex">
+		<div class="form-group flex">									
+							
+			<label for="school">家长是否已确认录取：</label>
+			<input type="text" id="school" class="form-control"  v-model="school" placeholder="家长是否已确认录取">						
 			<label for="school">是否已确认录取：</label>
-			<input type="text" id="school" class="form-control"  v-model="school" placeholder="是否已确认录取">				
+			<input type="text" id="school" class="form-control"  v-model="school" placeholder="是否已确认录取">					
+		</div>
+		<div class="form-group flex">			
 			<input type="button"  value="添加" class="btn btn-primary" v-on:click="add()">
 			<input type="reset"  value="重置" class="btn btn-danger">
 		</div>
 	 </form>
 	 <hr/>
-	 <table class="table table-bordered table-hover">
-		 <caption class="h3 text-info">新生信息录入表</caption>
-		 <tr>
-			 <th class="text-center">序号</th>
-			 <th class="text-center">姓名</th>
-			 <th class="text-center">年龄</th>
-			 <th class="text-center">身份证号</th>
-			 <th class="text-center">准考证号</th>
-			 <th class="text-center">录取编号</th>
-			 <th class="text-center">毕业学校</th>
-			 <th class="text-center">电话</th>
-			 <th class="text-center">手机</th>
-			 <th class="text-center">邮箱</th>
-			 <th class="text-center">密码</th>
-			 <th class="text-center">性别</th>
-			 <th class="text-center">家庭地址</th>
-			 <th class="text-center">收货地址</th>
-			 <th class="text-center">新生是否已确认录取</th>
-			 <th class="text-center">家长是否已确认录取</th>
-			 <th class="text-center">是否已确认录取</th>
-			 <th class="text-center">操作</th>
-		 </tr>
-		 <tr class="text-center" v-for="item in myData">
-			 <td>{{$index+1}}</td>
-			 <td>{{item.sname}}</td>
-			 <td>{{item.age}}</td>
-			 <td>{{item.idNum}}</td>
-			 <td>{{item.examNum}}</td>
-			 <td>{{item.admitNum}}</td>
-			 <td>{{item.school}}</td>
-			 <td>{{item.telephone}}</td>
-			 <td>{{item.mobile}}</td>
-			 <td>{{item.email}}</td>
-			 <td>{{item.pwd}}</td>
-			 <td>{{item.pwd}}</td>
-			 <td>{{item.gender}}</td>
-			 <td>{{item.addressH}}</td>
-			 <td>{{item.addressR}}</td>
-			 <td>{{item.studentConfirm}}</td>
-			 <td>{{item.parentConfirm}}</td>
-			 <td>{{item.confirm}}</td>
-			 <td>
-				 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
-			 </td>
-		 </tr>
-		 <tr v-show="myData.length!=0">
-			 <td colspan="7" class="text-right">
-				 <button class="btn btn-danger"  data-toggle="modal" data-target="#layer" v-on:click="nowIndex=-2">删除全部</button>
-			 </td>
-		 </tr>
-		 <tr v-show="myData.length==0">
-			 <td colspan="7" class="text-center text-info">
-				 <p>暂无数据...</p>
-			 </td>
-		 </tr>
-	 </table>
+	 
 	 <!--模态框 弹出框-->
 	 <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
 		  <div class="modal-dialog">

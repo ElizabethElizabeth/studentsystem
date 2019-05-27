@@ -7,55 +7,46 @@
   <title>Document</title>
   <script src="js/bootstrap.js"></script>
   <link rel="stylesheet" href="css/bootstrap.css">
-  <style>
-    *{
-      margin: 0;padding: 0;
-    }
-    .flex{
-      display: flex;
-    }
-    .daohang ul{
-      list-style: none;
-      margin-top: 60px;
-    }
-    .daohang{
-      width: 17%;   
-    }
-    .daohang h2{
-      margin-top: 44px;
-    }
-    .frame{
-      width: 83%;
-    }
-    body{
-      background: #ccc;
-    }
-    .relateve{
-      position: relative;
-    }
-    .absolute1{
-      position: absolute;
-      top: 570px;left: 160px;
-    }
-  </style>
+  <link rel="stylesheet" href="css/teacher.css">
 </head>
 <body>
   <div class="flex">
     <div class="daohang relative">
       <h2>大学新生预录取系统教师端</h2>
       <ul>
-        <li><a href="infoinput.html" target="targetText">新生信息录入</a></li>       
-        <li><a href="infocheck.html" target="targetText">新生信息录入表</a></li>
-        <li><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>     
-        <li><a href="changepwd.html" target="targetText">修改教师登录密码</a></li>
+        <li class="list-group-item-info"><a href="infoinput.html" target="targetText">新生信息录入</a></li>       
+        <li class="list-group-item-info"><a href="infocheck.html" target="targetText">新生信息查看与修改</a></li>
+        <li class="list-group-item-info"><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>    
       </ul>
-      <a class="absolute1" href="javascript:;" id="btnLogout">退出</a>
+      <div class="absolute1">
+        你好，<span id="teacherName"></span>.
+        <button class="btn-info button1" onclick="showPwdcard()">修改密码</button>
+        <a href="javascript:;" id="btnLogout">退出</a>
+      </div>
     </div>
     <div class="frame" style="border:0;" >
+      <div class="pwdcard">
+        <h4>修改教师登录密码</h4>
+        <form>
+          原密码:<input type="password" name="oldpwd"><br>
+          新密码:<input type="password" name="newpwd"><br>
+          <p>
+            <button type="button" class="btn-success" onclick="changePwd()">提交</button>  
+            <input style="margin-left: 132px" type="button" value="取消" class="x btn-danger">
+          </p>   
+        </form>
+      </div>
       <iframe src="infoinput.html"    name="targetText" height=1000px; width=100%  frameborder="0"  scrolling="no" >
       </iframe>
     </div>
 </div>
+<script>
+  // 显示密码框
+  var pwdcard=document.getElementsByClassName("pwdcard")[0];
+  function showPwdcard(){
+    pwdcard.style.display="block";
+  }
+</script>
 <script src="js/jquery-1.11.3.js"></script>
 <script>
   $("#btnLogout").click(function(){
@@ -67,6 +58,37 @@
       }
     })
   })
+</script>
+<script>
+  $(".x").click(function(){
+    $(this).parent().parent().parent().hide();
+  })
+</script>
+<script>
+  var $txtOldPwd=$("input[name=oldpwd]");
+  var $txtNewPwd=$("input[name=newpwd]");
+  function changePwd(){
+    if($txtOldPwd.val().trim()!==""&&$txtNewPwd.val().trim()!==""){
+      $.ajax({
+        url:"/user/teacherchangepwd",
+        type:"get",
+        data:{
+            oldpwd:$txtOldPwd.val().trim(),
+            newpwd:$txtNewPwd.val().trim()
+        },
+        dataType:"json",
+        success:function(res){
+            if(res.code==0){
+                alert(res.msg);
+            }else{
+                alert("修改密码成功！");
+                $txtOldPwd.val("");
+                $txtNewPwd.val("");
+            }
+        }
+      })
+    }
+  }
 </script>
 </body>
 </html>

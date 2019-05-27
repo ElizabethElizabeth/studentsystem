@@ -7,6 +7,8 @@
   <title>Document</title>
   <script src="js/bootstrap.js"></script>
   <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/vue.js"></script>
   <style>
     body{
       background: #eee;
@@ -14,7 +16,95 @@
   </style>
 </head>
 <body>
-  <h3>新生信息录入表</h3>
+  <h3 class="text-info">新生信息查看与修改</h3>
   <hr>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th class="text-center">姓名</th>
+      <th class="text-center">年龄</th>
+      <th class="text-center">身份证号</th>
+      <th class="text-center">准考证号</th>
+      <th class="text-center">密码</th>
+      <th class="text-center">毕业学校</th>
+      <th class="text-center">电话</th>
+      <th class="text-center">手机</th>
+      <th class="text-center">邮箱</th>
+      <th class="text-center">性别</th>
+      <th class="text-center">家庭地址</th>
+      <th class="text-center">新生是否已确认录取</th>
+      <th class="text-center">家长是否已确认录取</th>
+      <th class="text-center">是否已确认录取</th>
+      <th class="text-center">操作</th>
+    </tr>
+    <tr class="text-center" v-for="item in myData">
+      <td>{{item.sname}}</td>
+      <td>{{item.age}}</td>
+      <td>{{item.idNum}}</td>
+      <td>{{item.examNum}}</td>
+      <td>{{item.pwd}}</td>
+      <td>{{item.school}}</td>
+      <td>{{item.mobile}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.pwd}}</td>
+      <td>{{item.gender}}</td>
+      <td>{{item.addressH}}</td>
+      <td>{{item.studentConfirm}}</td>
+      <td>{{item.parentConfirm}}</td>
+      <td>{{item.confirm}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm"data-toggle="modal" data-target="#layer"v-on:click="nowIndex=$index">删除</button>
+      </td>
+    </tr>
+    <tr v-show="myData.length!=0">
+      <td colspan="7" class="text-right">
+        <button class="btn btn-danger"  data-toggle="modal"data-target="#layer" v-on:click="nowIndex=-2">删除部</button>
+      </td>
+    </tr>
+    <tr v-show="myData.length==0">
+      <td colspan="7" class="text-center text-info">
+        <p>暂无数据...</p>
+      </td>
+    </tr>
+  </table>
+  <script>
+      window.onload = function(){
+        new Vue({
+          el:'#box',
+          data:{
+           myData:[],
+           username:"",
+           age:"",
+           number:"",
+           email:"",
+           school:"",
+           nowIndex:-100
+          },
+          methods:{
+           add:function(){
+              this.myData.push({
+                username:this.username,
+                age:this.age,
+                number:this.number,
+                email:this.email,
+                school:this.school
+              })
+             this.username="",
+             this.age="",
+             this.number="",
+             this.email="",
+             this.school=""
+           },
+            del:function(n){
+              if(n ==-2){
+                this.myData="";
+              }{
+                this.myData.splice(n,1);
+              }
+            }
+          }
+        })
+      }
+  </script> 
+
 </body>
 </html>
