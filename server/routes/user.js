@@ -239,4 +239,8 @@ router.get("/changeConfirm",(req,res)=>{
         res.send({code:0, msg:"必须同时提供学生姓名，身份证号，准考证号和密码！"})
     }
 })
+router.get("/logout",(req,res)=>{
+    delete req.session.uid;
+    res.send({code:200});
+})
 module.exports=router;

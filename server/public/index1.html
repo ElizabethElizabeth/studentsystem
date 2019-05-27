@@ -18,7 +18,7 @@
       <a href="javascript:;">设为首页</a>  
       你好，<span id="uname"></span>.
       <button onclick="showPwdcard()">修改密码</button>
-      <a href="index.html">退出</a>
+      <a href="javascript:;" id="btnLogout">退出</a>
     </h5>
    <section>
     <img src="img/logo.png">
@@ -94,6 +94,15 @@
 </script>
 <script src="js/jquery-1.11.3.js"></script>
 <script>
+  $("#btnLogout").click(function(){
+    $.ajax({
+      url:"/user/logout",
+      type:"get",
+      success:function(){
+        location.replace("index.html");
+      }
+    })
+  })
   $.ajax({
     url:"/user/islogin",
     type:"get",
@@ -101,6 +110,7 @@
     success:function(result){
       if(result.code==0){
         alert(result.msg);
+        location.replace("index.html");
       }else{
         $("#uname").html(result.uname);
       }
