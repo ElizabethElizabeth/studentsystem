@@ -25,7 +25,11 @@ body{
 }
 .absolute1{
   position: absolute;
-  top: 550px;left: 20px;
+  top: 530px;left: 20px;
+}
+.absolute2{
+  position: absolute;
+  top: 564px;left: 20px;
 }
 .pwdcard{
 position:fixed;
@@ -41,6 +45,20 @@ padding: 5px 10px;
 border-radius: 4px;
 box-shadow: 3px 4px #aac;
 }
+.stupwdcard{
+  position:fixed;
+  display:none;
+  left:50%; top:50%;
+  margin-left:0px;
+  margin-top:0px;
+  box-sizing: border-box;
+  width:250px; height:150px;
+  border: 1px solid #aac;
+  background: #ddc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 3px 4px #aac;
+  }
 .pwdcard p{
 margin-top: 12px;
 }

@@ -56,8 +56,8 @@
 		<div class="form-group flex">
 			<label for="department">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系别：</label>
 			<input type="text" id="department" class="form-control" v-model="department" placeholder="输入学生所在系别">
-			<label for="class">班级：</label>
-			<input type="text" id="class" class="form-control"  v-model="class" placeholder="输入新生所在班级">
+			<label for="classc">班级：</label>
+			<input type="text" id="classc" class="form-control"  v-model="classc" placeholder="输入新生所在班级">
 			<label for="buildings">宿舍楼：</label>
 			<input type="text" id="buildings" class="form-control"  v-model="buildings" placeholder="输入新生所在宿舍楼">
 	 
@@ -93,7 +93,7 @@
 				 type:"get",
 				 data:{
 					department:$("#department").val(),
-					class:$("#class").val(),
+					classc:$("#classc").val(),
 					buildings:$("#buildings").val(),
 					houseNumber:$("#houseNumber").val(),
 					sname:$("#sname").val(),
@@ -109,7 +109,11 @@
 					addressH:$("#addressH").val(),
 					addressR:$("#addressR").val(),
 					studentConfirm:$("#studentConfirm").is("checked")?1:0,
-					parentConfirm:$("#parentConfirm").is("checked")?1:0
+					parentConfirm:$("#parentConfirm").is("checked")?1:0,
+					department:$("#department").val(),
+					classc:$("#classc").val(),
+					buildings:$("#buildings").val(),
+					houseNumber:$("#houseNumber").val()
 				 },
 				 dataType:"json",
 				 success:function(result){

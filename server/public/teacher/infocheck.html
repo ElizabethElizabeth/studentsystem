@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
-  <h3 class="text-info">新生信息查看与修改</h3>
+  <h3 class="text-info">新生信息查看</h3>
   <hr>
   <table class="table table-bordered table-hover">
     <tr>
@@ -26,15 +26,14 @@
       <th class="text-center">准考证号</th>
       <th class="text-center">密码</th>
       <th class="text-center">毕业学校</th>
-      <th class="text-center">电话</th>
       <th class="text-center">手机</th>
-      <th class="text-center">邮箱</th>
       <th class="text-center">性别</th>
-      <th class="text-center">家庭地址</th>
-      <th class="text-center">新生是否已确认录取</th>
-      <th class="text-center">家长是否已确认录取</th>
+      <th class="text-center">收通知书地址</th>
       <th class="text-center">是否已确认录取</th>
-      <th class="text-center">操作</th>
+      <th class="text-center">系别</th>
+      <th class="text-center">性别</th>
+      <th class="text-center">宿舍楼</th>
+      <th class="text-center">宿舍门牌号</th>
     </tr>
     <tr class="text-center" v-for="item in myData">
       <td>{{item.sname}}</td>
@@ -44,24 +43,16 @@
       <td>{{item.pwd}}</td>
       <td>{{item.school}}</td>
       <td>{{item.mobile}}</td>
-      <td>{{item.email}}</td>
-      <td>{{item.pwd}}</td>
-      <td>{{item.gender}}</td>
-      <td>{{item.addressH}}</td>
-      <td>{{item.studentConfirm}}</td>
-      <td>{{item.parentConfirm}}</td>
-      <td>{{item.confirm}}</td>
-      <td>
-        <button class="btn btn-primary btn-sm"data-toggle="modal" data-target="#layer"v-on:click="nowIndex=$index">删除</button>
-      </td>
-    </tr>
-    <tr v-show="myData.length!=0">
-      <td colspan="7" class="text-right">
-        <button class="btn btn-danger"  data-toggle="modal"data-target="#layer" v-on:click="nowIndex=-2">删除部</button>
-      </td>
+      <td>{{item.gender}}</td>  
+      <td>{{item.addressR}}</td>
+      <td>{{item.confirm}}</td> 
+      <td>{{item.department}}</td>
+      <td>{{item.class}}</td>  
+      <td>{{item.buildings}}</td>
+      <td>{{item.houseNumber}}</td>      
     </tr>
     <tr v-show="myData.length==0">
-      <td colspan="7" class="text-center text-info">
+      <td colspan="10" class="text-center text-info">
         <p>暂无数据...</p>
       </td>
     </tr>
@@ -72,11 +63,20 @@
           el:'#box',
           data:{
            myData:[],
-           username:"",
+           sname:"",
            age:"",
-           number:"",
-           email:"",
+           idNum:"",
+           examNum:"",
+           pwd:"",
            school:"",
+           mobile:"",
+           gender:"",
+           addressR:"",
+           confirm:"",
+           department:"",
+           class:"",
+           buildings:"",
+           houseNumber:"",
            nowIndex:-100
           },
           methods:{
@@ -90,9 +90,18 @@
               })
              this.username="",
              this.age="",
-             this.number="",
-             this.email="",
-             this.school=""
+             this.idNum="",
+             this.examNum="",
+             this.pwd="",
+             this.school="",
+             this.mobile="",
+             this.gender="",
+             this.addressR="",
+             this.confirm="",
+             this.department="",
+             this.class="",
+             this.buildings="",
+             this.houseNumber=""
            },
             del:function(n){
               if(n ==-2){

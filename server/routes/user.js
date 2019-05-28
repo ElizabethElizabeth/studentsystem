@@ -27,14 +27,14 @@ var router=express.Router();
 //   });
 //2.用户注册
 router.get('/reg',(req,res)=>{
-    var {sname,age,idNum,examNum,pwd,school,telephone,mobile,email,gender,addressH,addressR,studentConfirm,parentConfirm}=req.query;
-    console.log(sname,age,idNum,examNum,pwd,school,telephone,mobile,email,gender,addressH,addressR,studentConfirm,parentConfirm);
+    var {sname,age,idNum,examNum,pwd,school,telephone,mobile,email,gender,addressH,addressR,studentConfirm,parentConfirm,department,classc,buildings,houseNumber}=req.query;
+    console.log(sname,age,idNum,examNum,pwd,school,telephone,mobile,email,gender,addressH,addressR,studentConfirm,parentConfirm,department,classc,buildings,houseNumber);
     //验证数据是否为空
-    if(sname&&age&&idNum&&examNum&&pwd&&school&&telephone&&mobile&&email&&gender!==undefined&&addressH&&addressR&&studentConfirm!==undefined&&parentConfirm!==undefined){
+    if(sname&&age&&idNum&&examNum&&pwd&&school&&telephone&&mobile&&email&&gender!==undefined&&addressH&&addressR&&studentConfirm!==undefined&&parentConfirm!==undefined&&department&&classc&&buildings&&houseNumber!==undefined){
         //执行SQL语句，将对象插入到xz_user中，如果插入成功，响应状态码200，消息 reg suc
         pool.query(
-            'INSERT INTO student values(null,?,?,?,?,null,?,?,?,?,?,?,?,?,?,?,?)',
-            [sname,age,idNum,examNum,school,telephone,mobile,email,pwd,gender,addressH,addressR,studentConfirm,parentConfirm,studentConfirm=="学生已确认"&&parentConfirm=="家长以确认"?1:0],(err,result)=>{
+            'INSERT INTO student values(null,?,?,?,?,null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            [sname,age,idNum,examNum,school,telephone,mobile,email,pwd,gender,addressH,addressR,studentConfirm,parentConfirm,studentConfirm=="学生已确认"&&parentConfirm=="家长已确认"?1:0,department,classc,buildings,houseNumber],(err,result)=>{
             if(err) throw err;
             console.log(result);
             if(result.affectedRows>0){

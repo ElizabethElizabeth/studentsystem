@@ -7,7 +7,7 @@ var router=express.Router();
 router.get("/",(req,res)=>{
   var examNum=req.query.examNum;
   if(examNum){
-    var sql="select * from dormclass where examNum=?";
+    var sql="select * from student where examNum=?";
     pool.query(sql,[examNum],(err,result)=>{
       if(err) console.log(err);
       res.send(result[0]);

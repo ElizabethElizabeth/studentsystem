@@ -16,13 +16,16 @@
       <h2>大学新生预录取系统教师端</h2>
       <ul>
         <li class="list-group-item-info"><a href="infoinput.html" target="targetText">新生信息录入</a></li>       
-        <li class="list-group-item-info"><a href="infocheck.html" target="targetText">新生信息查看与修改</a></li>
+        <li class="list-group-item-info"><a href="infocheck.html" target="targetText">新生信息查看</a></li>
         <li class="list-group-item-info"><a href="luqucheck.html" target="targetText">查看已确认录取的新生</a></li>    
       </ul>
       <div class="absolute1">
         你好，<span id="uname"></span>.
         <button class="btn-info button1" onclick="showPwdcard()">修改密码</button>
         <a href="javascript:;" id="btnLogout">退出</a>
+      </div>
+      <div class="absolute2">
+        <button class="btn-success" onclick="showstuPwdcard()">修改学生登录密码</button>
       </div>
     </div>
     <div class="frame" style="border:0;" >
@@ -37,6 +40,18 @@
           </p>   
         </form>
       </div>
+      <div class="stupwdcard">
+          <h4>修改学生登录密码</h4>
+          <form>
+            准考证号:<input type="text" name="examNum"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;原密码:<input type="password" name="oldpwd"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;新密码:<input type="password" name="newpwd"><br>
+            <p>
+            <button type="button" onclick="changestuPwd()">提交</button>  
+            <input style="margin-left: 154px" type="button" value="取消" class="x">
+          </p>   
+          </form>
+      </div>
       <iframe src="infoinput.html"    name="targetText" height=1000px; width=100%  frameborder="0"  scrolling="no" >
       </iframe>
     </div>
@@ -44,8 +59,12 @@
 <script>
   // 显示密码框
   var pwdcard=document.getElementsByClassName("pwdcard")[0];
+  var stupwdcard=document.getElementsByClassName("stupwdcard")[0];
   function showPwdcard(){
     pwdcard.style.display="block";
+  }
+  function showstuPwdcard(){
+    stupwdcard.style.display="block";
   }
 </script>
 
@@ -103,6 +122,18 @@
       })
     }
   }
+  function changestuPwd(){
+        $.ajax({
+            url:"/user/changepwd",
+            type:"get",
+            data:{
+                examNum:$("[name=examNum]").val(),
+                oldpwd:$("[name=oldpwd]").val(),
+                newpwd:$("[name=newpwd]").val()
+            },
+            dataType:"json",
+        })
+    }
 </script>
 </body>
 </html>
