@@ -53,8 +53,18 @@
 			<label for="email">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮箱：</label>
 			<input type="text" id="email" class="form-control"  v-model="email" placeholder="输入邮箱">
 		</div>
+		<div class="form-group flex">
+			<label for="department">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系别：</label>
+			<input type="text" id="department" class="form-control" v-model="department" placeholder="输入学生所在系别">
+			<label for="class">班级：</label>
+			<input type="text" id="class" class="form-control"  v-model="class" placeholder="输入新生所在班级">
+			<label for="buildings">宿舍楼：</label>
+			<input type="text" id="buildings" class="form-control"  v-model="buildings" placeholder="输入新生所在宿舍楼">
+	 
+			<label for="houseNumber">宿舍门牌号：</label>
+			<input type="text" id="houseNumber" class="form-control"  v-model="houseNumber" placeholder="输入新生所在宿舍门牌号">
+	 </div>
 		<div class="form-group">
-			
 			<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性别：</label>
 			<label for="male"></label><input type="radio" id="male" name="gender" v-model="gender" value="1" checked>男 <label for="female"></label><input type="radio" id="female" name="gender" v-model="gender" value="0">女
 			<label for="addressH">&nbsp;&nbsp;家庭地址：</label>
@@ -65,32 +75,15 @@
 		</div>
 		<div class="form-group flex">	
 			<label><input type="checkbox" id="studentConfirm" name="studentConfirm" v-model="studentConfirm">新生是否已确认录取</label>&nbsp;&nbsp;&nbsp;&nbsp;
-				<label><input type="checkbox" id="parentConfirm" name="parentConfirm" v-model="parentConfirm">家长是否已确认录取</label>							
+			<label><input type="checkbox" id="parentConfirm" name="parentConfirm" v-model="parentConfirm">家长是否已确认录取</label>							
 		</div>
+		
 		<div class="form-group flex">			
 			<input type="button"  value="添加" class="btn btn-primary" onclick="add()">
 			<input type="reset"  value="重置" class="btn btn-danger">
 		</div>
 	 </form>
 	 <hr/>
-	 
-	 <!--模态框 弹出框-->
-	 <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
-		  <div class="modal-dialog">
-			  <div class="modal-content">
-				  <div class="modal-header">
-					  <button class="close" data-dismiss="modal">
-						  <span>是否删除信息</span>
-					  </button>
-					  <h4 class="modal-title">确认删除吗？</h4>
-				  </div>
-				  <div class="modal-body text-right">
-					  <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
-					  <button class="btn btn-danger btn-sm" data-dismiss="modal" v-on:click="del(nowIndex)">确认</button>
-				  </div>
-			  </div>
-		  </div>
-	 </div>
 
 	 <script>
 		 function add(){
@@ -99,6 +92,10 @@
 				 url:"/user/reg",
 				 type:"get",
 				 data:{
+					department:$("#department").val(),
+					class:$("#class").val(),
+					buildings:$("#buildings").val(),
+					houseNumber:$("#houseNumber").val(),
 					sname:$("#sname").val(),
 					age:$("#age").val(),
 					idNum:$("#idNum").val(),

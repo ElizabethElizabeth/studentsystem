@@ -31,7 +31,7 @@
   <h3>新生个人信息</h3>
   <table>
     <tr>
-      <td>真实姓名</td>
+      <td>姓名</td>
       <td id="sname"></td>
     </tr>
     <tr>
@@ -61,10 +61,6 @@
     <tr>
       <td>家庭地址</td>
       <td id="addressH"></td>
-    </tr>
-    <tr>
-      <td>录取编号</td>
-      <td id="admitNum"></td>
     </tr>
     <tr>
       <td>收录取通知书地址</td>
@@ -100,7 +96,6 @@
                 console.log(result);
                 $("#addressH").html(result.addressH);
                 $("#addressR").html(result.addressR);
-                $("#admitNum").html(result.admitNum);
                 $("#age").html(result.age);
                 $("#confirm").html(result.confirm);
                 $("#email").html(result.email);
