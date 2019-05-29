@@ -34,7 +34,7 @@ router.get('/reg',(req,res)=>{
         //执行SQL语句，将对象插入到xz_user中，如果插入成功，响应状态码200，消息 reg suc
         pool.query(
             'INSERT INTO student values(null,?,?,?,?,null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-            [sname,age,idNum,examNum,school,telephone,mobile,email,pwd,gender,addressH,addressR,studentConfirm,parentConfirm,studentConfirm=="学生已确认"&&parentConfirm=="家长已确认"?1:0,department,classc,buildings,houseNumber],(err,result)=>{
+            [sname,age,idNum,examNum,school,telephone,mobile,email,pwd,gender,addressH,addressR,studentConfirm,parentConfirm,studentConfirm=="学生已确认"&&parentConfirm=="家长已确认"?"已确认录取":"未确认录取",department,classc,buildings,houseNumber],(err,result)=>{
             if(err) throw err;
             console.log(result);
             if(result.affectedRows>0){
