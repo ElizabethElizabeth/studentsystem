@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="js/bootstrap.js"></script>
+  
   <link rel="stylesheet" href="css/bootstrap.css">
-  <script src="js/jquery-1.7.2.min.js"></script>
-  <script src="js/vue.js"></script>
   <style>
     body{
       background: #eee;
@@ -19,23 +17,29 @@
   <h3 class="text-info">新生信息查看</h3>
   <hr>
   <table class="table table-bordered table-hover">
+    <thead>
     <tr>
       <th class="text-center">姓名</th>
       <th class="text-center">年龄</th>
       <th class="text-center">身份证号</th>
       <th class="text-center">准考证号</th>
-      <th class="text-center">密码</th>
       <th class="text-center">毕业学校</th>
       <th class="text-center">手机</th>
       <th class="text-center">性别</th>
       <th class="text-center">收通知书地址</th>
       <th class="text-center">是否已确认录取</th>
       <th class="text-center">系别</th>
-      <th class="text-center">性别</th>
       <th class="text-center">宿舍楼</th>
       <th class="text-center">宿舍门牌号</th>
     </tr>
-    <tr class="text-center" v-for="item in myData">
+    </thead>
+    <tbody>
+        <tr v-show="myData.length==0">
+            <td colspan="10" class="text-center text-info">
+              <p>暂无数据...</p>
+            </td>
+          </tr>
+    <!--<tr class="text-center" v-for="item in myData">
       <td>{{item.sname}}</td>
       <td>{{item.age}}</td>
       <td>{{item.idNum}}</td>
@@ -47,72 +51,40 @@
       <td>{{item.addressR}}</td>
       <td>{{item.confirm}}</td> 
       <td>{{item.department}}</td>
-      <td>{{item.class}}</td>  
       <td>{{item.buildings}}</td>
       <td>{{item.houseNumber}}</td>      
-    </tr>
-    <tr v-show="myData.length==0">
-      <td colspan="10" class="text-center text-info">
-        <p>暂无数据...</p>
-      </td>
-    </tr>
+    </tr>-->
+    </tbody>
+    
   </table>
+  <script src="../js/jquery-1.11.3.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <script>
-      window.onload = function(){
-        new Vue({
-          el:'#box',
-          data:{
-           myData:[],
-           sname:"",
-           age:"",
-           idNum:"",
-           examNum:"",
-           pwd:"",
-           school:"",
-           mobile:"",
-           gender:"",
-           addressR:"",
-           confirm:"",
-           department:"",
-           class:"",
-           buildings:"",
-           houseNumber:"",
-           nowIndex:-100
-          },
-          methods:{
-           add:function(){
-              this.myData.push({
-                username:this.username,
-                age:this.age,
-                number:this.number,
-                email:this.email,
-                school:this.school
-              })
-             this.username="",
-             this.age="",
-             this.idNum="",
-             this.examNum="",
-             this.pwd="",
-             this.school="",
-             this.mobile="",
-             this.gender="",
-             this.addressR="",
-             this.confirm="",
-             this.department="",
-             this.class="",
-             this.buildings="",
-             this.houseNumber=""
-           },
-            del:function(n){
-              if(n ==-2){
-                this.myData="";
-              }{
-                this.myData.splice(n,1);
-              }
-            }
+      $.ajax({
+        url:"/student",
+        type:"get",
+        dataType:"json",
+        success:function(result){
+          var html=``;
+          for(var item of result){
+            html+=`<tr class="text-center">
+              <td>${item.sname}</td>
+              <td>${item.age}</td>
+              <td>${item.idNum}</td>
+              <td>${item.examNum}</td>
+              <td>${item.school}</td>
+              <td>${item.mobile}</td>
+              <td>${item.gender==1?"男":"女"}</td>
+              <td>${item.addressR}</td>
+              <td>${item.confirm}</td> 
+              <td>${item.department}</td> 
+              <td>${item.buildings}</td>
+              <td>${item.houseNumber}</td>      
+            </tr>`
           }
-        })
-      }
+          $("tbody").html(html);
+        }
+      })
   </script> 
 
 </body>

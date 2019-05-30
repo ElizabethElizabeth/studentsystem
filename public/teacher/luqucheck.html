@@ -15,48 +15,8 @@
     background: #eee;
   }
 </style>
-<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/vue.js"></script>
-<script>
-	  window.onload = function(){
-		  new Vue({
-			  el:'#box',
-			  data:{
-				 myData:[],
-				 username:"",
-				 age:"",
-				 number:"",
-				 email:"",
-				 school:"",
-				 nowIndex:-100
-			  },
-			  methods:{
-				 add:function(){
-					  this.myData.push({
-						  username:this.username,
-						  age:this.age,
-						  number:this.number,
-						  email:this.email,
-						  school:this.school
-					  })
-					 this.username="",
-					 this.age="",
-					 this.number="",
-					 this.email="",
-					 this.school=""
-				 },
-				  del:function(n){
-					  if(n ==-2){
-						  this.myData="";
-					  }{
-						  this.myData.splice(n,1);
-					  }
-				  }
-			  }
-		  })
-	  }
-</script>
 
 </head>
 <body>
@@ -65,6 +25,7 @@
 	 <hr>
 	 <table class="table table-bordered table-hover">
 		 <caption class="h3 text-info">已确认录取新生表</caption>
+		 <thead>
 		 <tr>
 			 <th class="text-center">姓名</th>
 			 <th class="text-center">年龄</th>
@@ -76,8 +37,15 @@
 			 <th class="text-center">家庭地址</th>
 			 <th class="text-center">是否已确认录取</th>
 			 <th class="text-center">操作</th>
-		  </tr>
-		 <tr class="text-center" v-for="item in myData">
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-show="myData.length==0">
+				<td colspan="10" class="text-center text-info">
+					<p>暂无数据...</p>
+				</td>
+			</tr>
+		 	<!--<tr class="text-center" v-for="item in myData">
 			 <td>{{item.sname}}</td>
 			 <td>{{item.age}}</td>
 			 <td>{{item.gender}}</td>
@@ -90,20 +58,11 @@
 			 <td>
 				 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
 			 </td>
-		 </tr>
-		 <tr v-show="myData.length!=0">
-			 <td colspan="10" class="text-center">
-				 <button class="btn btn-danger"  data-toggle="modal" data-target="#layer" v-on:click="nowIndex=-2">删除全部</button>
-			 </td>
-		 </tr>
-		 <tr v-show="myData.length==0">
-			 <td colspan="10" class="text-center text-info">
-				 <p>暂无数据...</p>
-			 </td>
-		 </tr>
+		 	</tr>-->
+		</tbody>
 	 </table>
 	 <!--模态框 弹出框-->
-	 <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
+	 <div role="dialog" class="modal" id="layer" data-index="{{nowIndex}}">
 		  <div class="modal-dialog">
 			  <div class="modal-content">
 				  <div class="modal-header">
@@ -120,6 +79,35 @@
 		  </div>
 	 </div>
 
- 
+	 <script>
+      $.ajax({
+        url:"/student/confirm",
+        type:"get",
+        dataType:"json",
+        success:function(result){
+          var html=``;
+          for(var item of result){
+            html+=`<tr class="text-center" v-for="item in myData">
+							<td>${item.sname}</td>
+							<td>${item.age}</td>
+							<td>${item.gender}</td>
+							<td>${item.idNum}</td>
+							<td>${item.examNum}</td>
+							<td>${item.school}</td>
+							<td>${item.mobile}</td>		 
+							<td>${item.addressH}</td>
+							<td>${item.confirm}</td>
+							<td>
+								<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
+							</td>
+							</tr>`
+          }
+          $("tbody").html(html);
+        }
+			})
+			$("tbody").on("click","button",function(){
+				alert("继续删除吗？");
+			})
+  </script> 
 </body>
 </html>
